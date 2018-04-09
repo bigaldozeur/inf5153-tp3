@@ -1,0 +1,23 @@
+package edu.uqam.inf5153.tp3.servicesTechniques.bd;
+
+import java.sql.Connection;
+import java.sql.SQLException;
+
+public class Connexion extends SqliteConnexion {
+
+	
+	private static Connection conn = null;
+	  
+	private Connexion()  throws ClassNotFoundException, SQLException{
+	
+		conn = SqliteConnexion.getConnexion();
+		
+	}
+
+	public static Connection getInstance(){
+		return conn;
+    }
+	   
+	
+	
+}

@@ -1,0 +1,46 @@
+package edu.uqam.inf5153.tp3;
+
+import java.sql.*;
+import edu.uqam.inf5153.tp3.servicesTechniques.bd.*;
+
+public class App 
+{
+    /**
+     * @param args
+     * @throws ClassNotFoundException
+     * @throws SQLException
+     */
+    public static void main( String[] args ) throws ClassNotFoundException, SQLException
+    {
+    	/*
+    	Connexion.setBd("DossierMedical.db");
+    	Connection conn = Connexion.connecter();
+   
+        
+    	Statement stmt = conn.createStatement();
+    	//stmt.execute("create table test(a int, b int, z string)");
+    	
+    	
+    	stmt.execute("insert into test values(1,1,'2018-01-01')");
+    	
+    	ResultSet rs =stmt.executeQuery("select * from test");
+    	
+    	while(rs.next()){
+    		System.out.println( rs.getString("a") + " " + rs.getString("b") + " " +  rs.getString("z") );	
+    	}
+    
+    	conn.close();
+    	*/
+    	
+    	String j = "{\"id\":1,\"medecin\":\"alain\",\"nom\":\"abcxyz\"}";
+    	  Object obj = parser.parse(j);
+
+          JSONObject jsonObject = (JSONObject) obj;
+          System.out.println(jsonObject);
+
+          String name = (String) jsonObject.get("medecin");
+          System.out.println(name);
+    	
+        
+    }
+} 

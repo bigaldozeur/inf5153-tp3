@@ -1,0 +1,50 @@
+package edu.uqam.inf5153.tp3.servicesTechniques;
+
+import java.sql.*;
+
+
+import edu.uqam.inf5153.tp3.servicesTechniques.bd.Connexion;
+/*
+ * 
+ * NOTE : Retour : ResultSet et non ArrayList
+ *  insertion json, besoin nom medecin et #am et json dossier
+ * */
+public class ControlleurDeBd  {
+	private static Connection conn = null;
+	
+	private static void seConnecter() throws ClassNotFoundException, SQLException{
+		conn = Connexion.connecter();
+	}
+	
+	public static void initialiserBD(){
+		/*create table DossierMedical(idpk integer primary key autoincrement, 
+		 * 	id string, dossier string, date_insertion datetime default current_timestamp, 
+				utilisateur string);
+			
+		*/
+	}
+	public static ResultSet obtenirHistorique(String id) throws ClassNotFoundException, SQLException{
+		if( !Connexion.estConnecter() || conn == null ){
+			seConnecter();
+		}
+		
+		PreparedStatement pstmt = conn.prepareStatement("select * from DossierMedical where id=?");
+		pstmt.setString(0, id);
+		ResultSet rs = pstmt.executeQuery();
+		return rs;
+	}
+	
+	public static ResultSet obtenirListeMedecinTraitant(String id) throws ClassNotFoundException, SQLException{
+		if( !Connexion.estConnecter() || conn == null ){
+			seConnecter();
+		}
+		
+		PreparedStatement pstmt = conn.prepareStatement("select distinct medecin from DossierMedical where id=?");
+		pstmt.setString(0, id);
+		ResultSet rs = pstmt.executeQuery();
+		return rs;
+	}
+	
+}
+
+

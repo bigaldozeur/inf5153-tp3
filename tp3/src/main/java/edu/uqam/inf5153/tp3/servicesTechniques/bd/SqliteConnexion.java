@@ -1,0 +1,26 @@
+package edu.uqam.inf5153.tp3.servicesTechniques.bd;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
+    class SqliteConnexion {
+		private static Connection conn = null;
+		
+		private SqliteConnexion() {}
+		
+		static Connection getConnexion(String bd) throws ClassNotFoundException, SQLException{
+			if (conn == null){
+				String nomConnexion = "jdbc:sqlite:" + bd;
+				Class.forName("org.sqlite.JDBC");
+				conn =  DriverManager.getConnection(nomConnexion);
+			}
+			return conn;
+		} 
+		
+		static boolean estConnecter(){
+			return !(conn == null);
+		}
+	
+	
+    }

@@ -1,0 +1,29 @@
+package edu.uqam.inf5153.tp3;
+
+import java.sql.*;
+import edu.uqam.inf5153.tp3.servicesTechniques.bd.*;
+
+public class App 
+{
+    public static void main( String[] args ) throws ClassNotFoundException, SQLException
+    {
+    	Connection conn = Connexion.getConnexion("DossierMedical.db");
+   
+        
+    	Statement stmt = conn.createStatement();
+    	//stmt.execute("create table test(a int, b int, z string)");
+    	
+    	
+    	stmt.execute("insert into test values(1,2,'abc')");
+    	
+    	ResultSet rs =stmt.executeQuery("select * from test");
+    	
+    	while(rs.next()){
+    		System.out.println( rs.getString("a") + " " + rs.getString("b") + " " +  rs.getString("z") );	
+    	}
+    
+    	conn.close();
+    	
+        
+    }
+} 

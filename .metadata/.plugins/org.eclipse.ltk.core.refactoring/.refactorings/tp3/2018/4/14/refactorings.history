@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring accessors="true" comment="Delete 2 elements from project &apos;tp3&apos;&#x0D;&#x0A;- Original project: &apos;tp3&apos;&#x0D;&#x0A;- Original elements:&#x0D;&#x0A;     sqlite3.def&#x0D;&#x0A;     sqlite3.dll" description="Delete elements" element1="target/sqlite3.dll" element2="target/sqlite3.def" elements="0" flags="589830" id="org.eclipse.jdt.ui.delete" resources="2" stamp="1523127562253" subPackages="false" version="1.0"/>
+</session>

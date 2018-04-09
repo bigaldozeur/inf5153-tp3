@@ -1,0 +1,86 @@
+package edu.uqam.inf5153.tp3;
+
+import java.sql.*;
+import java.time.LocalDateTime;
+
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+
+import edu.uqam.inf5153.tp3.servicesTechniques.ControlleurDeBd;
+import edu.uqam.inf5153.tp3.servicesTechniques.bd.*;
+
+public class App 
+{
+    /**
+     * @param args
+     * @throws ClassNotFoundException
+     * @throws SQLException
+     * @throws ParseException 
+     */
+    public static void main( String[] args ) throws ClassNotFoundException, SQLException
+    {
+    	/*
+    	Connexion.setBd("DossierMedical.db");
+    	Connection conn = Connexion.connecter();
+   
+        
+    	Statement stmt = conn.createStatement();
+    	//stmt.execute("create table test(a int, b int, z string)");
+    	
+    	
+    	stmt.execute("insert into test values(1,1,'2018-01-01')");
+    	
+    	ResultSet rs =stmt.executeQuery("select * from test");
+    	
+    	while(rs.next()){
+    		System.out.println( rs.getString("a") + " " + rs.getString("b") + " " +  rs.getString("z") );	
+    	}
+    
+    	conn.close();
+    	
+    	JSONParser parser = new JSONParser();
+    	
+    	String j = "{\"id\":1,\"medecin\":\"alain\",\"nom\":\"abcxyz\"}";
+    	  Object obj = null;
+		try {
+			obj = parser.parse(j);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+          JSONObject jsonObject = (JSONObject) obj;
+         // System.out.println(jsonObject);
+          System.out.println(jsonObject.toJSONString());
+          
+          String name = (String) jsonObject.get("medecin");
+          System.out.println(name);
+    	*/
+    	
+    	 
+         String json = "{\"medecin\":\"alain\",\"maladie\":\"lemal\"}";
+         try {
+			ControlleurDeBd.ajouter("abc1234", json);
+			System.out.println("Le dossier est insere");
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+         
+      
+		  
+        ResultSet rs = ControlleurDeBd.consulterDossier("abc1234");
+        while(rs.next()){
+        	//System.out.println("id de la bd : " +  rs.getString("id"));
+        	System.out.println("Ass Maladie : " +  rs.getString("numAssuranceMaladie"));
+        	System.out.println("dossier : " +  rs.getString("dossier"));
+        	System.out.println("medecin traitant : " +  rs.getString("medecin"));
+        	System.out.println("Insere le : " +  rs.getString("dateInsertion"));
+        	//valeur hardcodé pour l'instant... le temps que authentification fonctionne
+        	System.out.println("Insere par : " +  rs.getString("utilisateur"));
+        }
+        
+    }
+} 
