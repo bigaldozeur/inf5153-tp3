@@ -50,8 +50,8 @@ public class PnlSession extends JPanel {
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				SessionFrm session = new SessionFrm();
-				if(textField.getText().replaceAll("\\s+","").isEmpty()) {
-					String message = "Veuillez entrer votre code d'utilisateur.";
+				if(textField.getText().replaceAll("\\s+","").isEmpty() || passwordField.getPassword().length == 0) {
+					String message = "Veuillez entrer votre code d'utilisateur et votre mot de passe.";
 					session.getControleurGui();
 					JOptionPane.showMessageDialog(ControleurDeGuiApp.window.frmDossierMdicalCentralis, message, "Session", JOptionPane.WARNING_MESSAGE);
 				}
