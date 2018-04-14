@@ -1,0 +1,61 @@
+package edu.uqam.inf5153.tp3.application.session;
+
+import javax.security.auth.login.LoginContext;
+import javax.security.auth.login.LoginException;
+
+import edu.uqam.inf5153.tp3.domaine.ControlleurLogin;
+import edu.uqam.inf5153.tp3.fondation.CryptWithMD5;
+
+/*
+ * Le code suivant est inspiré de 
+ * https://www.youtube.com/watch?v=xv2xltxnnBU
+ * 
+ * */
+public class Session {
+	private String utilisateur = "";
+	private String motPasse;
+	public String getUtilisateur(){
+		return "alain";
+	}
+	public String getMotPasse(){
+		return "alain";
+	}
+	public void setUtilisateur(String u){
+		utilisateur = u;
+	}
+	public void setMotPasse(char[] pwd){
+		motPasse = CryptWithMD5.encrypt(pwd.toString());
+	}
+	public Session(){
+		
+	
+	}
+	
+	
+	public boolean authentifier(){
+		return true;
+	}
+
+/*	
+	public boolean authentifier(){
+		System.setProperty("java.security.auth.login.config", "DossierMedical.config");
+		LoginContext login = null;
+		try {
+			login = new LoginContext("DossierMedicalConfig", new ControlleurLogin());
+		} catch (LoginException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	//	while(true){
+			try{
+				login.login();
+				return true;
+			}catch(LoginException e){
+				//System.out.println(e.getMessage());
+				return false;
+			}
+		}
+	//}
+*/
+}

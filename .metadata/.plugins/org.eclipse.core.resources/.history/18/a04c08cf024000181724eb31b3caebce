@@ -1,0 +1,67 @@
+package edu.uqam.inf5153.tp3.domaine;
+
+import java.io.IOException;
+import java.util.Map;
+
+import javax.security.auth.Subject;
+import javax.security.auth.callback.Callback;
+import javax.security.auth.callback.CallbackHandler;
+import javax.security.auth.callback.NameCallback;
+import javax.security.auth.callback.UnsupportedCallbackException;
+import javax.security.auth.login.LoginException;
+import javax.security.auth.spi.LoginModule;
+
+public class ModuleLogin implements LoginModule {
+	private boolean authentifieAvecSucces = false;
+	private CallbackHandler cbh = null;
+	public boolean abort() throws LoginException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean commit() throws LoginException {
+		// TODO Auto-generated method stub
+		return authentifieAvecSucces;
+	}
+
+	public void initialize(Subject arg0, CallbackHandler arg1, Map<String, ?> arg2, Map<String, ?> arg3) {
+		this.cbh = arg1;
+
+	}
+
+	public boolean login() throws LoginException {
+		
+		Callback[] cbArray = new Callback[2];
+		cbArray[0] = new NameCallback("UserName");
+		cbArray[1] = new NameCallback("Password");
+		
+		try {
+			cbh.handle(cbArray);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (UnsupportedCallbackException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		String usr = ((NameCallback)cbArray[0]).getName();
+		String pwd = ((NameCallback)cbArray[0]).getName();
+		
+		if(usr.equals("alain") && pwd.equals("alain")){
+			authentifieAvecSucces = true;
+		}else{
+			authentifieAvecSucces = false;
+		}
+		
+		
+		return authentifieAvecSucces;
+	}
+
+	public boolean logout() throws LoginException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+}

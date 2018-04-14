@@ -10,6 +10,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import edu.uqam.inf5153.tp3.application.session.Session;
+
 import java.awt.Font;
 import java.awt.TrayIcon;
 import java.awt.TrayIcon.MessageType;
@@ -32,12 +34,17 @@ public class SessionFrm {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
+	
+
+					
 					SessionFrm window = new SessionFrm();
 					window.frmDossierMdicalCentralis.setVisible(true);
 					
 					controleurGui = new ControleurDeGuiApp(window);
 					controleurGui.AfficherPanneau(new PnlSession());
+
 					
+
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
