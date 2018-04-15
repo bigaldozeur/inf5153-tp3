@@ -21,13 +21,13 @@ public class ControlleurDeBdSecurite {
 	public static boolean estAuthentifier(){
 		return authificationEstValide;
 	}
-	public static boolean authentifier(String utilisateur, String pwd) throws Exception{
+	public static boolean authentifier(String nom, String pwd) throws Exception{
 		if( !Connexion.estConnecter() || conn == null ){
 			seConnecter();
 		}
-		String sql = "select pwdhash from utilisateurs where utilisateur=?";
+		String sql = "select pwdhash from utilisateurs where nom=?";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
-		pstmt.setString(1, utilisateur);
+		pstmt.setString(1, nom);
 		ResultSet rs = pstmt.executeQuery();
 		
 		
@@ -50,7 +50,7 @@ public class ControlleurDeBdSecurite {
 		return authificationEstValide;
 	}
 	
-	public static void creerUtilisateur(String utilisateur,String pwd) throws Exception{
+	public static void creerUtilisateur(String nom,String pwd) throws Exception{
 		
 	    
 	    if( !Connexion.estConnecter() || conn == null ){
@@ -63,19 +63,19 @@ public class ControlleurDeBdSecurite {
 	    String sql = "insert into utilisateurs(utilisateur, pwdhash) values (?,?)";
 	    PreparedStatement pstmt = conn.prepareStatement(sql);
 	    
-	    pstmt.setString(1, utilisateur);
+	    pstmt.setString(1, nom);
 	    pstmt.setString(2,pwdhash);
 	   
 	    
 	    pstmt.executeUpdate();
 	}
-	public static boolean utilisateurExiste(String utilisateur) throws ClassNotFoundException, SQLException{
+	public static boolean utilisateurExiste(String nom) throws ClassNotFoundException, SQLException{
 		if( !Connexion.estConnecter() || conn == null ){
 			seConnecter();
 		}
-		String sql = "select count(*) as cnt from utilisateurs where utilisateur=?";
+		String sql = "select count(*) as cnt from utilisateurs where nom=?";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
-		pstmt.setString(1, utilisateur);
+		pstmt.setString(1, nom);
 		ResultSet rs = pstmt.executeQuery();
 		
 		 int compteUtilisateur = rs.getInt("cnt");

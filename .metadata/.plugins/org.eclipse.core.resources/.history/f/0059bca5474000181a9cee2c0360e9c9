@@ -21,13 +21,13 @@ public class ControlleurDeBdSecurite {
 	public static boolean estAuthentifier(){
 		return authificationEstValide;
 	}
-	public static boolean authentifier(String utilisateur, String pwd) throws Exception{
+	public static boolean authentifier(String nom, String pwd) throws Exception{
 		if( !Connexion.estConnecter() || conn == null ){
 			seConnecter();
 		}
-		String sql = "select pwdhash from utilisateurs where utilisateur=?";
+		String sql = "select pwdhash from utilisateurs where nom=?";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
-		pstmt.setString(1, utilisateur);
+		pstmt.setString(1, nom);
 		ResultSet rs = pstmt.executeQuery();
 		
 		

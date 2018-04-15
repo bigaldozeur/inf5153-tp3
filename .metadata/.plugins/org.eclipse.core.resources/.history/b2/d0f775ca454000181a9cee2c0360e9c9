@@ -23,8 +23,7 @@ public class PnlSession extends JPanel {
 	private JTextField textField;
 	private JPasswordField passwordField;
 
-	private Session maSession = null;
-	
+private Session maSession = null;
 	/**
 	 * Create the panel.
 	 */
@@ -93,7 +92,7 @@ if(maSession.authentifier()){
 
 }
 else{
-	JOptionPane.showMessageDialog(ControleurDeGuiApp.window.frmDossierMdicalCentralis,"Erreur Authenfication","Authentification",JOptionPane.ERROR_MESSAGE);
+	JOptionPane.showMessageDialog(ControleurDeGuiApp.window.frmDossierMdicalCentralis,"erreur authenfication","Authentification",JOptionPane.ERROR_MESSAGE);
 }
 
 
