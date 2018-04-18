@@ -1,33 +1,18 @@
 package edu.uqam.inf5153.tp3.presentation;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
+import edu.uqam.inf5153.tp3.application.ControleurDeGuiApp;
+
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
 
-import edu.uqam.inf5153.tp3.application.ControleurDeGuiApp;
-import edu.uqam.inf5153.tp3.application.session.Session;
-
-import java.awt.Font;
-import java.awt.TrayIcon;
-import java.awt.TrayIcon.MessageType;
-
-import javax.swing.JPasswordField;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 public class SessionFrm {
 
 	public JFrame frmDossierMdicalCentralis;
 	protected static SessionFrm mainWindow;
 	private boolean initialise = false;
-	public static ControleurDeGuiApp controleurGui;
+	static ControleurDeGuiApp controleurGui;
 	/**
 	 * Launch the application.
 	 */

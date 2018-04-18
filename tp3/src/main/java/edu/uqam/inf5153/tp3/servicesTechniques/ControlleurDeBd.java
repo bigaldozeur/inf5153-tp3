@@ -90,7 +90,21 @@ public class ControlleurDeBd  {
 		return rs;
 	}
 	
-	
+	public static boolean rechercher(String numAssuranceMaladie) throws ClassNotFoundException, SQLException{
+		if( !Connexion.estConnecter() || conn == null ){
+			seConnecter();
+		}
+		
+		String sql = "select 1 from DossierMedical where numAssuranceMaladie = ?";
+		
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		 
+		pstmt.setString(1, numAssuranceMaladie);
+		ResultSet rs = pstmt.executeQuery();
+		if(rs.next())
+			return true;
+		return false;
+	}
 	
 	
 	public static void ajouter(String numAssuranceMaladie , String dossierJson) throws ParseException, ClassNotFoundException, SQLException{
