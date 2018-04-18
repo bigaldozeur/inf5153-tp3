@@ -1,24 +1,14 @@
 package edu.uqam.inf5153.tp3.presentation;
 
-import java.awt.BorderLayout;
-import java.awt.Component;
-import java.awt.List;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Vector;
 
-import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
-
-import com.google.gson.Gson;
 
 import edu.uqam.inf5153.tp3.application.ControleurDeGuiApp;
 import edu.uqam.inf5153.tp3.domaine.Dossier;
@@ -30,8 +20,7 @@ public class PnlDossier extends JPanel {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private static String noRamq = "0";
-
+	
 	/**
 	 * Create the panel.
 	 * @throws SQLException 
@@ -76,7 +65,7 @@ public class PnlDossier extends JPanel {
         	add(noRamq);
         	add(textNoRamq);
         	
-        	Dossier dossier = ControleurDeGuiApp.Create(rs.getString("dossier"));
+        	Dossier dossier = ControleurDeGuiApp.create(rs.getString("dossier"));
         	
         	JLabel mal = new JLabel("maladie : ");
         	JTextField textMal = new JTextField(dossier.getMaladie());
