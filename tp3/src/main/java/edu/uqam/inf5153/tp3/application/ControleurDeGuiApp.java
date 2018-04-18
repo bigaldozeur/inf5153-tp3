@@ -15,24 +15,7 @@ public class ControleurDeGuiApp {
 		window = sessionFrm;
 	}
 	
-	/**
-	 * Permet d'afficher n'importe quel panneau dans le panneau principal.
-	 * */
-	public void AfficherPanneau(JPanel jp) throws Exception {
-		window.frmDossierMdicalCentralis.setContentPane(jp);
-		window.frmDossierMdicalCentralis.revalidate();
-	}
-	/**
-	 * Permet d'afficher n'importe quel panneau dans le panneau principal avec un JComponent en parametres.
-	 * */
-	public void AfficherPanneau(JPanel jp, JComponent jcompo) {
-		// TODO : bon, trouver le moyen de passer ça :(
-		//jp.add(jcompo);
-		//jp.setVisible(false);
-		window.frmDossierMdicalCentralis.setContentPane(jp);
-		window.frmDossierMdicalCentralis.revalidate();
-	}
-	
+
 	/**
 	 * Permet de créer un nouveau dossier à partir d'un json
 	 * */

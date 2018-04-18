@@ -18,7 +18,6 @@ import java.awt.event.ActionEvent;
 
 public class PnlSession extends JPanel {
 
-	
 	private static final long serialVersionUID = 1L;
 	private JTextField textField;
 	private JPasswordField passwordField;
@@ -29,7 +28,7 @@ public class PnlSession extends JPanel {
 	 * Create the panel.
 	 */
 	public PnlSession() {
-maSession = new Session();
+		maSession = new Session();
 		setLayout(null);
 		
 		JLabel label = new JLabel("Utilisateur :");
@@ -54,21 +53,15 @@ maSession = new Session();
 		JButton button = new JButton("Entrer");
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
 
-					
-
-				
-				SessionFrm session = new SessionFrm();
 				if(textField.getText().replaceAll("\\s+","").isEmpty() || passwordField.getPassword().length == 0) {
 					String message = "Veuillez entrer votre code d'utilisateur et votre mot de passe.";
-					session.getControleurGui();
 					JOptionPane.showMessageDialog(ControleurDeGuiApp.window.frmDossierMdicalCentralis, message, "Session", JOptionPane.WARNING_MESSAGE);
 				}
 				else {
 					
 					try {
-	
+
 						
 /*
  * mauvaise endroit le creer utilisateur
@@ -88,9 +81,8 @@ maSession.setUtilisateur(textField.getText());
 maSession.setMotPasse( mp.toCharArray());
 
 if(maSession.authentifier()){
-
-						session.getControleurGui().AfficherPanneau(new PnlNoDossier());
-
+	SessionFrm.window.frmDossierMdicalCentralis.setContentPane(new PnlNoDossier());
+	SessionFrm.window.frmDossierMdicalCentralis.revalidate();
 }
 else{
 	JOptionPane.showMessageDialog(ControleurDeGuiApp.window.frmDossierMdicalCentralis,"Erreur Authenfication","Authentification",JOptionPane.ERROR_MESSAGE);

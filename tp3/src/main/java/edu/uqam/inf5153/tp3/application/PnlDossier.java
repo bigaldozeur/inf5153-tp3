@@ -37,76 +37,75 @@ public class PnlDossier extends JPanel {
 	 * @throws ClassNotFoundException 
 	 */
 	public PnlDossier() throws ClassNotFoundException, SQLException {
+	    init("abc1234");		      	        	
+	}
 	
+	public PnlDossier(String noRAMQ) throws ClassNotFoundException, SQLException {
+	    init(noRAMQ);		      	        	
+	}
+	        
+	private void init(String noRAMQ) throws SQLException, ClassNotFoundException {
 		setLayout(null);
 		
 		JLabel lblDossierMdical = new JLabel("Dossier médical du patient");
 		lblDossierMdical.setBounds(50, 83, 246, 14);
 		add(lblDossierMdical);
 		
-		ResultSet rs = ControlleurDeBd.consulterDossier("abc1234");
+		ResultSet rs;
+		rs = ControlleurDeBd.consulterDossier(noRAMQ);
 		
-		// TODO Retrouver le noDossier demandé dans le genre : (ne fonctionne pas on doit ajouter des index pour s'y retrouver ou bien passer l'information autrement)
-		//Component[] lc = this.getComponents();
-		//for( Component c : lc ) {
-		//	if(c.getName() == "textNoRamq")
-		//		noRamq = ((JTextField)c).getText();
-		//}		
-		//ResultSet rs = ControlleurDeBd.consulterDossier(noRamq);
-		
+	
 		// On pourrait utiliser les meta, mais il doit y avoir moyen d'améliorer ici
 		// // It creates and displays the table ref: https://stackoverflow.com/questions/10620448/most-simple-code-to-populate-jtable-from-resultset
 	    //JTable table = new JTable(buildTableModel(rs));
 	    //JOptionPane.showMessageDialog(null, new JScrollPane(table));
-	        while(rs.next()){
-	        	JLabel id = new JLabel("id de la bd : ");
-	        	JTextField textId = new JTextField(rs.getString("id"));
-	        	textId.setEnabled(false);
-	        	id.setBounds(50, 100, 100, 14);
-	        	textId.setBounds(180, 100, 200, 16);
-	        	add(id);
-	        	add(textId);
-	        	
-	        	JLabel noRamq = new JLabel("Ass Maladie : ");
-	        	JTextField textNoRamq = new JTextField(rs.getString("numAssuranceMaladie"));
-	        	noRamq.setBounds(50, 120, 100, 14);
-	        	textNoRamq.setBounds(180, 120, 200, 16);
-	        	add(noRamq);
-	        	add(textNoRamq);
-	        	
-	        	Dossier dossier = ControleurDeGuiApp.Create(rs.getString("dossier"));
-	        	
-	        	JLabel mal = new JLabel("maladie : ");
-	        	JTextField textMal = new JTextField(dossier.getMaladie());
-	        	mal.setBounds(50, 140, 100, 14);
-	        	textMal.setBounds(180, 140, 200, 16);
-	        	add(mal);
-	        	add(textMal);
-	        	
-	        	JLabel med = new JLabel("medecin : ");
-	        	JTextField textMed = new JTextField(dossier.getMedecin());
-	        	med.setBounds(50, 160, 100, 14);
-	        	textMed.setBounds(180, 160, 200, 16);
-	        	add(med);
-	        	add(textMed);
-	        
-	        	JLabel medTrait = new JLabel("medecin traitant : ");
-	        	JTextField textMedTrait = new JTextField(rs.getString("medecin"));
-	        	medTrait.setBounds(50, 180, 120, 14);
-	        	textMedTrait.setBounds(180, 180, 200, 16);
-	        	add(medTrait);
-	        	add(textMedTrait);
-	        	
-	          	JLabel di = new JLabel("Insere le : ");
-	        	JTextField textDi = new JTextField(rs.getString("dateInsertion"));
-	        	di.setBounds(50, 200, 100, 14);
-	        	textDi.setBounds(180, 200, 200, 16);
-	        	add(di);
-	        	add(textDi);
-	      	        	
-	        }
-	        
-		
+        while(rs.next()){
+        	JLabel id = new JLabel("id de la bd : ");
+        	JTextField textId = new JTextField(rs.getString("id"));
+        	textId.setEnabled(false);
+        	id.setBounds(50, 100, 100, 14);
+        	textId.setBounds(180, 100, 200, 16);
+        	add(id);
+        	add(textId);
+        	
+        	JLabel noRamq = new JLabel("Ass Maladie : ");
+        	JTextField textNoRamq = new JTextField(rs.getString("numAssuranceMaladie"));
+        	noRamq.setBounds(50, 120, 100, 14);
+        	textNoRamq.setBounds(180, 120, 200, 16);
+        	add(noRamq);
+        	add(textNoRamq);
+        	
+        	Dossier dossier = ControleurDeGuiApp.Create(rs.getString("dossier"));
+        	
+        	JLabel mal = new JLabel("maladie : ");
+        	JTextField textMal = new JTextField(dossier.getMaladie());
+        	mal.setBounds(50, 140, 100, 14);
+        	textMal.setBounds(180, 140, 200, 16);
+        	add(mal);
+        	add(textMal);
+        	
+        	JLabel med = new JLabel("medecin : ");
+        	JTextField textMed = new JTextField(dossier.getMedecin());
+        	med.setBounds(50, 160, 100, 14);
+        	textMed.setBounds(180, 160, 200, 16);
+        	add(med);
+        	add(textMed);
+        
+        	JLabel medTrait = new JLabel("medecin traitant : ");
+        	JTextField textMedTrait = new JTextField(rs.getString("medecin"));
+        	medTrait.setBounds(50, 180, 120, 14);
+        	textMedTrait.setBounds(180, 180, 200, 16);
+        	add(medTrait);
+        	add(textMedTrait);
+        	
+          	JLabel di = new JLabel("Insere le : ");
+        	JTextField textDi = new JTextField(rs.getString("dateInsertion"));
+        	di.setBounds(50, 200, 100, 14);
+        	textDi.setBounds(180, 200, 200, 16);
+        	add(di);
+        	add(textDi);
+	
+        }
 	}
 
 	// Inutilisé pour l'instant.

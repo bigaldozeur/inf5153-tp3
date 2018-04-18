@@ -30,7 +30,8 @@ public class PnlNoDossier extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				SessionFrm session = new SessionFrm();
 				try {
-					session.getControleurGui().AfficherPanneau(new PnlDossier(), textNoRamq);
+					SessionFrm.window.frmDossierMdicalCentralis.setContentPane(new PnlDossier(textNoRamq.getText()));
+					SessionFrm.window.frmDossierMdicalCentralis.revalidate();
 				}
 				catch (Exception ex) {
 					  System.err.println("Exception: " + ex.getMessage());

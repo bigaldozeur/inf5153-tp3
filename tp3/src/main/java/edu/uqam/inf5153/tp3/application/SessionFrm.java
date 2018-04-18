@@ -24,7 +24,7 @@ import java.awt.event.ActionEvent;
 public class SessionFrm {
 
 	public JFrame frmDossierMdicalCentralis;
- 
+	static SessionFrm window;
 	private boolean initialise = false;
 	public static ControleurDeGuiApp controleurGui;
 	/**
@@ -33,18 +33,14 @@ public class SessionFrm {
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
-				try {
-	
-
-					
-					SessionFrm window = new SessionFrm();
+				try {	
+					window = new SessionFrm();
 					window.frmDossierMdicalCentralis.setVisible(true);
 					
 					controleurGui = new ControleurDeGuiApp(window);
-					controleurGui.AfficherPanneau(new PnlSession());
-
 					
-
+					window.frmDossierMdicalCentralis.setContentPane(new PnlSession());
+					window.frmDossierMdicalCentralis.revalidate();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
