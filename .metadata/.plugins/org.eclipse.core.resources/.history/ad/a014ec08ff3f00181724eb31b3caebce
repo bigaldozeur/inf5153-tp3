@@ -1,0 +1,12 @@
+package edu.uqam.inf5153.tp3.application.session;
+
+import javax.security.auth.login.LoginContext;
+
+public class Session {
+
+	public Session(){
+		System.setProperty("java.security.auth.login.config", "DossierMedical.config");
+		LoginContext login = new LoginContext("DossierMedicalConfig", new Login());
+		
+	}
+}

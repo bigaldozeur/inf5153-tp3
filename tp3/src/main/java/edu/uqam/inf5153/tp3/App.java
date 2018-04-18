@@ -1,5 +1,7 @@
 package edu.uqam.inf5153.tp3;
 
+import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
 import java.sql.*;
 import java.time.LocalDateTime;
 
@@ -8,6 +10,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+import edu.uqam.inf5153.tp3.application.session.Session;
 import edu.uqam.inf5153.tp3.servicesTechniques.ControlleurDeBd;
 import edu.uqam.inf5153.tp3.servicesTechniques.bd.*;
 
@@ -21,6 +24,8 @@ public class App
      */
     public static void main( String[] args ) throws ClassNotFoundException, SQLException
     {
+    	
+  	System.exit(0);
     	/*
     	Connexion.setBd("DossierMedical.db");
     	Connection conn = Connexion.connecter();
@@ -58,7 +63,7 @@ public class App
           String name = (String) jsonObject.get("medecin");
           System.out.println(name);
     	*/
-    	
+    	/*
     	 
          String json = "{\"medecin\":\"alain\",\"maladie\":\"lemal\"}";
          try {
@@ -113,6 +118,7 @@ public class App
         	//valeur hardcodé pour l'instant... le temps que authentification fonctionne
         	System.out.println("Insere par : " +  rs.getString("utilisateur"));
         	System.out.println("********************************************************");
-        }
+        } */
     }
+   
 } 
