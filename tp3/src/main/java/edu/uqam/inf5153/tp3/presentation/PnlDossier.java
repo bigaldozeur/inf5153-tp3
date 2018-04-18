@@ -1,4 +1,4 @@
-package edu.uqam.inf5153.tp3.application;
+package edu.uqam.inf5153.tp3.presentation;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
@@ -20,6 +20,7 @@ import javax.swing.table.DefaultTableModel;
 
 import com.google.gson.Gson;
 
+import edu.uqam.inf5153.tp3.application.ControleurDeGuiApp;
 import edu.uqam.inf5153.tp3.domaine.Dossier;
 import edu.uqam.inf5153.tp3.servicesTechniques.ControlleurDeBd;
 

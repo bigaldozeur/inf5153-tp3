@@ -1,4 +1,4 @@
-package edu.uqam.inf5153.tp3.application;
+package edu.uqam.inf5153.tp3.presentation;
 
 import javax.swing.JPanel;
 import javax.swing.JLabel;
@@ -7,7 +7,7 @@ import javax.swing.JOptionPane;
 import java.awt.Font;
 import javax.swing.JTextField;
 
-import edu.uqam.inf5153.tp3.application.SessionFrm;
+import edu.uqam.inf5153.tp3.application.ControleurDeGuiApp;
 import edu.uqam.inf5153.tp3.application.session.Session;
 import edu.uqam.inf5153.tp3.servicesTechniques.securite.ControlleurDeBdSecurite;
 
@@ -56,7 +56,7 @@ public class PnlSession extends JPanel {
 
 				if(textField.getText().replaceAll("\\s+","").isEmpty() || passwordField.getPassword().length == 0) {
 					String message = "Veuillez entrer votre code d'utilisateur et votre mot de passe.";
-					JOptionPane.showMessageDialog(ControleurDeGuiApp.window.frmDossierMdicalCentralis, message, "Session", JOptionPane.WARNING_MESSAGE);
+					JOptionPane.showMessageDialog(SessionFrm.mainWindow.frmDossierMdicalCentralis, message, "Session", JOptionPane.WARNING_MESSAGE);
 				}
 				else {
 					
@@ -81,11 +81,11 @@ maSession.setUtilisateur(textField.getText());
 maSession.setMotPasse( mp.toCharArray());
 
 if(maSession.authentifier()){
-	SessionFrm.window.frmDossierMdicalCentralis.setContentPane(new PnlNoDossier());
-	SessionFrm.window.frmDossierMdicalCentralis.revalidate();
+	SessionFrm.mainWindow.frmDossierMdicalCentralis.setContentPane(new PnlNoDossier());
+	SessionFrm.mainWindow.frmDossierMdicalCentralis.revalidate();
 }
 else{
-	JOptionPane.showMessageDialog(ControleurDeGuiApp.window.frmDossierMdicalCentralis,"Erreur Authenfication","Authentification",JOptionPane.ERROR_MESSAGE);
+	JOptionPane.showMessageDialog(SessionFrm.mainWindow.frmDossierMdicalCentralis,"Erreur Authenfication","Authentification",JOptionPane.ERROR_MESSAGE);
 }
 
 

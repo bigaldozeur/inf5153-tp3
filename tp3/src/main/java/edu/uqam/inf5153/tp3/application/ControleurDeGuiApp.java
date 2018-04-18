@@ -7,12 +7,11 @@ import javax.swing.JTextField;
 import com.google.gson.Gson;
 
 import edu.uqam.inf5153.tp3.domaine.Dossier;
+import edu.uqam.inf5153.tp3.presentation.SessionFrm;
 
 public class ControleurDeGuiApp {
-	static public SessionFrm window;
 
-	public ControleurDeGuiApp(SessionFrm sessionFrm){
-		window = sessionFrm;
+	public ControleurDeGuiApp(){
 	}
 	
 

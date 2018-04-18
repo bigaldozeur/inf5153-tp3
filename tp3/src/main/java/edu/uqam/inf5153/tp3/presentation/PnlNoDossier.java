@@ -1,4 +1,4 @@
-package edu.uqam.inf5153.tp3.application;
+package edu.uqam.inf5153.tp3.presentation;
 
 import javax.swing.JPanel;
 import javax.swing.JLabel;
@@ -30,8 +30,8 @@ public class PnlNoDossier extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				SessionFrm session = new SessionFrm();
 				try {
-					SessionFrm.window.frmDossierMdicalCentralis.setContentPane(new PnlDossier(textNoRamq.getText()));
-					SessionFrm.window.frmDossierMdicalCentralis.revalidate();
+					SessionFrm.mainWindow.frmDossierMdicalCentralis.setContentPane(new PnlDossier(textNoRamq.getText()));
+					SessionFrm.mainWindow.frmDossierMdicalCentralis.revalidate();
 				}
 				catch (Exception ex) {
 					  System.err.println("Exception: " + ex.getMessage());

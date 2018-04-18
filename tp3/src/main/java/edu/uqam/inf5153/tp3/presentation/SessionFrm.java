@@ -1,4 +1,4 @@
-package edu.uqam.inf5153.tp3.application;
+package edu.uqam.inf5153.tp3.presentation;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -10,6 +10,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import edu.uqam.inf5153.tp3.application.ControleurDeGuiApp;
 import edu.uqam.inf5153.tp3.application.session.Session;
 
 import java.awt.Font;
@@ -24,7 +25,7 @@ import java.awt.event.ActionEvent;
 public class SessionFrm {
 
 	public JFrame frmDossierMdicalCentralis;
-	static SessionFrm window;
+	protected static SessionFrm mainWindow;
 	private boolean initialise = false;
 	public static ControleurDeGuiApp controleurGui;
 	/**
@@ -34,13 +35,13 @@ public class SessionFrm {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {	
-					window = new SessionFrm();
-					window.frmDossierMdicalCentralis.setVisible(true);
+					mainWindow = new SessionFrm();
+					mainWindow.frmDossierMdicalCentralis.setVisible(true);
 					
-					controleurGui = new ControleurDeGuiApp(window);
+					controleurGui = new ControleurDeGuiApp();
 					
-					window.frmDossierMdicalCentralis.setContentPane(new PnlSession());
-					window.frmDossierMdicalCentralis.revalidate();
+					mainWindow.frmDossierMdicalCentralis.setContentPane(new PnlSession());
+					mainWindow.frmDossierMdicalCentralis.revalidate();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
