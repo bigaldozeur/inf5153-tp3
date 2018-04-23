@@ -23,6 +23,7 @@ public class PnlSession extends JPanel {
 	
 	/**
 	 * Create the panel.
+	 * @param aidePanneau 
 	 */
 	public PnlSession() {
 		

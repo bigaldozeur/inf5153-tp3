@@ -24,9 +24,11 @@ public class SessionFrm {
 					mainWindow.frmDossierMdicalCentralis.setVisible(true);
 					
 					controleurGui = new ControleurDeGuiApp();
-					
 					mainWindow.frmDossierMdicalCentralis.setContentPane(new PnlSession());
 					mainWindow.frmDossierMdicalCentralis.revalidate();
+				
+					
+							
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

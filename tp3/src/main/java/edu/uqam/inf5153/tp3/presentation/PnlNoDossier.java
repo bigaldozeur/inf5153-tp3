@@ -1,6 +1,7 @@
 package edu.uqam.inf5153.tp3.presentation;
 
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -59,8 +60,18 @@ public class PnlNoDossier extends JPanel {
 	void verifierNoRamq() {
 			try {
 				if(SessionFrm.controleurGui.index(textNoRamq.getText())) {
-					SessionFrm.mainWindow.frmDossierMdicalCentralis.setContentPane(new PnlDossier(textNoRamq.getText()));
-					SessionFrm.mainWindow.frmDossierMdicalCentralis.revalidate();
+					PnlDossier pnlDossier = new PnlDossier(textNoRamq.getText());
+					
+					JScrollPane sp = new JScrollPane(pnlDossier);
+					sp.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+					sp.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+					sp.setBounds(50, 30, 400, 100);
+					
+					SessionFrm.mainWindow.frmDossierMdicalCentralis.add(sp);
+					
+					SessionFrm.mainWindow.frmDossierMdicalCentralis.setContentPane(sp);
+					//SessionFrm.mainWindow.frmDossierMdicalCentralis.revalidate();
+					SessionFrm.mainWindow.frmDossierMdicalCentralis.setVisible(true);
 				}
 				else {
 					JOptionPane.showMessageDialog(SessionFrm.mainWindow.frmDossierMdicalCentralis,"Erreur, le numéro d'assurance maladie entré n'existe pas ou un problème est survenu. Veuillez recommencer.","Numéro d'assurance maladie",JOptionPane.ERROR_MESSAGE);
