@@ -6,7 +6,7 @@ public class Dossier {
 	private String maladie = new String();
 	private String medecin = new String();
 	private Personne patient = new Personne();
-	private GENRE genre = GENRE.NOT_APPLICABLE;
+	private GENRE genre = GENRE.NOT_KNOWN;
 	private String dateDeNaissance = new String(); // TODO : Devrait être un champs Date
 	private String pere = new String();
 	private String mere = new String();

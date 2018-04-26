@@ -155,6 +155,7 @@ public class PnlVisite extends JPanel {
 						case "NomMed": 	per.setNom(valeur);
 										vis.setMedecinVu(per);
 										// TODO : enregistrer la visite au complet dans dossier
+										// TODO : notify pour enregistrement automatique du dossier
 										
 										break;
 						case "PrenomMed": 	per.setPrenom(valeur);
