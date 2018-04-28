@@ -42,21 +42,18 @@ public class AidePanneau {
 	 * Permet d'ajouter une entrée dans le panneau
 	 * Retourne la prochaine position x pour un label.
 	 * */
-	public int AjouterEntreePanneau(String nomComponentText, String nomLabel, String valeur, boolean afficherTextField, int posX, int bond, JComponent panneau) {
+	public int AjouterEntreePanneau(String nomTextField, String textLabel, String valeurTextField, boolean afficherTextField, int posX, int bond, JComponent panneau) {
 		
-		JLabel label = new JLabel(nomLabel);
-		label.setBounds(50, posX, 100, 14);
-    	panneau.add(label);
-
+		// Abstract Factory (pourrait être un label pour un dossier avec différentes caractéristiques et un label pour un autre type)
+		LabelTextFactory controls = new DossierLabelTextFactory();
 		if(afficherTextField) {
-			
-			JTextField tf = new JTextField(valeur);
-			tf.setName(nomComponentText);
-			tf.setBounds(180, posX, 200, 16);
-			panneau.add(tf);
+			TextField text = controls.createTextField(nomTextField, valeurTextField, posX, panneau);
 		}
-    	posX+=bond;
+        Label lbl = controls.createLabel("", textLabel, posX, panneau);
+			
+		posX+=bond;
     	return posX;
 	}
+
 
 }
