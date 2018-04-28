@@ -69,20 +69,18 @@ public class PnlDossier extends JScrollPane {
 		   
 		
 		// TODO aller le chercher le dossier dans gestionDossier va retourner un dossier
-		ResultSet rs;
-		rs = ControlleurDeBd.consulterDossier(noRAMQ);
+		
 		
 	
 		// TODO : il doit y avoir encore moyen d'améliorer ici!
 		// // It creates and displays the table ref: https://stackoverflow.com/questions/10620448/most-simple-code-to-populate-jtable-from-resultset
 	    // JTable table = new JTable(buildTableModel(rs));
 	    // JOptionPane.showMessageDialog(null, new JScrollPane(table));
-        while(rs.next()){
         	
         	int posX = 120;
         	int bond = 20;
         	
-        	final Dossier dossier = ControleurDeGuiApp.create(rs.getString("dossier"));
+        	final Dossier dossier = ControleurDeGuiApp.getDossier(noRAMQ);//ControleurDeGuiApp.create(rs.getString("dossier"));
         	     	
         	posX = AidePanneau.getInstance().AjouterEntreePanneau("Nom et prénom : ", dossier.getNom() + " " + dossier.getPrenom(), posX, this);     
         	posX = AidePanneau.getInstance().AjouterEntreePanneau("Date de naissance : ", dossier.getDateDeNaissance(), posX, this);     
@@ -92,7 +90,7 @@ public class PnlDossier extends JScrollPane {
         	posX = AidePanneau.getInstance().AjouterEntreePanneau("Mère : ", dossier.getMere(), posX, this); 	
         	posX = AidePanneau.getInstance().AjouterEntreePanneau("Ville de naissance : ", dossier.getVilleNaissance(), posX, this);
         	posX = AidePanneau.getInstance().AjouterEntreePanneau("Coordonnées : ", dossier.getCoordonnees(), posX, this); 	
-        	posX = AidePanneau.getInstance().AjouterEntreePanneau("Numéro d'assurance maladie : ", rs.getString("numAssuranceMaladie"), posX, this);
+        	posX = AidePanneau.getInstance().AjouterEntreePanneau("Numéro d'assurance maladie : ", noRAMQ, posX, this);
         	
         	posX += bond;
         	// Obtenir la liste des antécédents médicaux
@@ -144,8 +142,7 @@ public class PnlDossier extends JScrollPane {
         	
         	posX = AidePanneau.getInstance().AjouterEntreePanneau("maladie : ", dossier.getMaladie(), posX, this); // TODO : à enlever, en attendant
         	posX = AidePanneau.getInstance().AjouterEntreePanneau("medecin : ", dossier.getMedecin(), posX, this); // TODO : à enlever, en attendant
-        	posX = AidePanneau.getInstance().AjouterEntreePanneau("medecin traitant : ", rs.getString("medecin"), posX, this); // TODO : à enlever, en attendant
-        }
+        
 	}
 	
 	

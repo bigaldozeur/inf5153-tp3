@@ -1,5 +1,6 @@
 package edu.uqam.inf5153.tp3.application;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import org.json.simple.parser.ParseException;
@@ -18,14 +19,6 @@ public class ControleurDeGuiApp {
 	
 	public ControleurDeGuiApp(){
 		maSession = new Session();
-	}
-	
-	/**
-	 * Permet de construire un dossier à partir d'un json
-	 * */
-	public static Dossier create(String json){
-		Gson g = new Gson();
-		return (g.fromJson(json, Dossier.class));
 	}
 	
 	
@@ -89,6 +82,11 @@ public class ControleurDeGuiApp {
 		} catch (Exception e) {
 			return false;
 		}
+	}
+
+	public static Dossier getDossier(String noRAMQ) throws ClassNotFoundException, SQLException {
+		GestionDossier gs = new GestionDossier();
+		return gs.rechercher(noRAMQ);
 	}
 	
 	
