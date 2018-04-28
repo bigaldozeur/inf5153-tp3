@@ -68,6 +68,7 @@ public class PnlDossier extends JScrollPane {
 		add(btnRetour);
 		   
 		
+		// TODO aller le chercher le dossier dans gestionDossier va retourner un dossier
 		ResultSet rs;
 		rs = ControlleurDeBd.consulterDossier(noRAMQ);
 		
