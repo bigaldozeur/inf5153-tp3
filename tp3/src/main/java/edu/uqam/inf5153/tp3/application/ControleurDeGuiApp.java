@@ -48,18 +48,47 @@ public class ControleurDeGuiApp {
 	}
 	
 	/**
-	 * Permet de vérifier l'utilisateur et son mot de passe, s'il n'existe pas, le crée. (Pour les besoin du TP seulement)
+	 * Permet de créer l'utilisateur et son mot de passe, s'il n'existe pas, le crée. (Pour les besoin du TP seulement)
+	 * @param sb 
 	 * @throws Exception 
 	 * @throws SQLException 
 	 * @throws ClassNotFoundException 
+	 * retourne un message sur le résultat
 	 * */
-	public void creerVerifierSession(String user, char[] password) throws ClassNotFoundException, SQLException, Exception {
+	public boolean creerVerifierSession(String user, char[] password, StringBuilder sb) throws ClassNotFoundException, SQLException, Exception {
 								
 		String mp = String.valueOf(password);
 		if(!ControlleurDeBdSecurite.utilisateurExiste(user)){
-			ControlleurDeBdSecurite.creerUtilisateur(user, mp);
-			System.out.println("utilisateur cree");
-			System.exit(0);
+				ControlleurDeBdSecurite.creerUtilisateur(user, mp);	
+				sb.append("Utilisateur créé avec succès!");
+			return true;
+		}
+		else {
+			sb.append("L'utilisateur existe déjà ou une erreur s'est produite, veuillez recommencez.");
+			return false;
+			
+		}
+			
+		
+	}
+	
+	/**
+	 * Permet de vérifier l'utilisateur
+	 * @param sb
+	 * @throws Exception 
+	 * @throws SQLException 
+	 * @throws ClassNotFoundException 
+	 * retourne un message d'erreur si pas résussi, sinon null
+	 * */
+	public boolean verifierSession(String user, char[] password, StringBuilder sb) throws ClassNotFoundException, SQLException, Exception {
+								
+		String mp = String.valueOf(password);
+		if(!ControlleurDeBdSecurite.utilisateurExiste(user)){
+			sb.append("L'utilisateur entré n'existe pas, vous devez le créer.");
+			return false;
+		}
+		else {
+			return true;
 		}
 		
 	}

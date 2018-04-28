@@ -20,7 +20,6 @@ public class PnlSession extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private JTextField textField;
 	private JPasswordField passwordField;
-
 	
 	/**
 	 * Create the panel.
@@ -50,7 +49,7 @@ public class PnlSession extends JPanel {
 		textField = new JTextField();
 		textField.addKeyListener(lKeyChk);
 		textField.setColumns(10);
-		textField.setBounds(156, 70, 246, 20);
+		textField.setBounds(156, 70, 284, 20);
 		add(textField);
 		
 		JLabel label_1 = new JLabel("Mot de passe :");
@@ -60,12 +59,12 @@ public class PnlSession extends JPanel {
 		
 		passwordField = new JPasswordField();
 		passwordField.addKeyListener(lKeyChk);
-		passwordField.setBounds(156, 114, 246, 20);
+		passwordField.setBounds(156, 114, 284, 20);
 		add(passwordField);
 		
-		JButton button = new JButton("Entrer");
-		button.addKeyListener(lKeyChk);
-		button.addActionListener(new ActionListener() {
+		JButton btnEntrer = new JButton("Entrer");
+		btnEntrer.addKeyListener(lKeyChk);
+		btnEntrer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(verifierChampsSession() == true){
 					accepterUtilisateur();
@@ -73,9 +72,21 @@ public class PnlSession extends JPanel {
 			}
 
 		});
-		button.setFont(new Font("Tahoma", Font.BOLD, 11));
-		button.setBounds(156, 168, 89, 23);
-		add(button);
+		btnEntrer.setFont(new Font("Tahoma", Font.BOLD, 11));
+		btnEntrer.setBounds(156, 168, 89, 23);
+		add(btnEntrer);
+		
+		JButton btnCreateNewUser = new JButton("Créer nouvel utilisateur");
+		btnCreateNewUser.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if(verifierChampsSession() == true){
+					creerUtilisateur();
+				}
+			}
+		});
+		btnCreateNewUser.setFont(new Font("Tahoma", Font.BOLD, 11));
+		btnCreateNewUser.setBounds(255, 168, 185, 23);
+		add(btnCreateNewUser);
 
 	}
 	
@@ -94,14 +105,18 @@ public class PnlSession extends JPanel {
 	
 	private void accepterUtilisateur() {
 		try {
-			
-				SessionFrm.controleurGui.creerVerifierSession(textField.getText(), passwordField.getPassword());
+				StringBuilder sb = new StringBuilder();
+				boolean result = SessionFrm.controleurGui.verifierSession(textField.getText(), passwordField.getPassword(), sb);
+				if(result == false) {
+					JOptionPane.showMessageDialog(SessionFrm.mainWindow.frmDossierMdicalCentralis,sb.toString(),"Authentification",JOptionPane.ERROR_MESSAGE);
+					return;
+				}
 				if(SessionFrm.controleurGui.verifierAuthentifier(textField.getText(), passwordField.getPassword())) {
 						SessionFrm.mainWindow.frmDossierMdicalCentralis.setContentPane(new PnlNoDossier());
 						SessionFrm.mainWindow.frmDossierMdicalCentralis.revalidate();
 				}
 				else{
-						JOptionPane.showMessageDialog(SessionFrm.mainWindow.frmDossierMdicalCentralis,"Erreur Authenfication","Authentification",JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog(SessionFrm.mainWindow.frmDossierMdicalCentralis,"Une mauvaise combinaison utilisateur et mot de passe a été entré ou une erreur s'est produit, veuillez recommencez.","Authentification",JOptionPane.ERROR_MESSAGE);
 				}
 			
 		}
@@ -110,6 +125,31 @@ public class PnlSession extends JPanel {
 		}
 
 	}
+	
+	private void creerUtilisateur() {
+		try {
+				StringBuilder sb = new StringBuilder();
+				boolean result = SessionFrm.controleurGui.creerVerifierSession(textField.getText(), passwordField.getPassword(), sb);
+				if(result == false) {
+					JOptionPane.showMessageDialog(SessionFrm.mainWindow.frmDossierMdicalCentralis,sb.toString(),"Authentification",JOptionPane.ERROR_MESSAGE);
+				}
+				else{
+					JOptionPane.showMessageDialog(SessionFrm.mainWindow.frmDossierMdicalCentralis,sb.toString(),"Authentification",JOptionPane.INFORMATION_MESSAGE);
+				
+					if(SessionFrm.controleurGui.verifierAuthentifier(textField.getText(), passwordField.getPassword())) {
+							SessionFrm.mainWindow.frmDossierMdicalCentralis.setContentPane(new PnlNoDossier());
+							SessionFrm.mainWindow.frmDossierMdicalCentralis.revalidate();
+					}
+					else{
+							JOptionPane.showMessageDialog(SessionFrm.mainWindow.frmDossierMdicalCentralis,"Une erreur d'authenfication s'est produite suite à la création, veuillez vous authentifier de nouveau.","Authentification",JOptionPane.ERROR_MESSAGE);
+					}
+				}
+			
+		}
+		catch (Exception ex) {
+			  System.err.println("Exception: " + ex.getMessage());
+		}
 
+	}
 
 }

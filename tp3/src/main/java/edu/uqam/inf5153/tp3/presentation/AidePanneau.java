@@ -1,10 +1,7 @@
 package edu.uqam.inf5153.tp3.presentation;
 
 import javax.swing.JComponent;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTextField;
+
 
 // Singleton
 public class AidePanneau {
