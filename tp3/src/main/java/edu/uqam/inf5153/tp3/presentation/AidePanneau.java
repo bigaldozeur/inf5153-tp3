@@ -1,5 +1,7 @@
 package edu.uqam.inf5153.tp3.presentation;
 
+import java.awt.Font;
+
 import javax.swing.JComponent;
 
 
@@ -44,7 +46,8 @@ public class AidePanneau {
 		// Abstract Factory (pourrait être un label pour un dossier avec différentes caractéristiques et un label pour un autre type)
 		LabelTextFactory controls = new DossierLabelTextFactory();
 		if(afficherTextField) {
-			controls.createTextField(nomTextField, valeurTextField, posX, panneau);
+			DossierTextField dtf = controls.createTextField(nomTextField, valeurTextField, posX, panneau);
+			dtf.setFont(new Font("arial", Font.PLAIN, 12));
 		}
         controls.createLabel("", textLabel, posX, panneau);
 			

@@ -1,5 +1,7 @@
 package edu.uqam.inf5153.tp3.presentation;
 
+import java.awt.Font;
+
 import javax.swing.JComponent;
 import javax.swing.JTextField;
 
@@ -10,6 +12,7 @@ public class DossierTextField implements TextField{
 	private boolean afficher= true;
 	private int posX = 0;
 	private JComponent composant = null;
+	JTextField tf = null;
 
 	public DossierTextField(String nom, String valeur, int posX, JComponent composant) {
 		this.nom = nom;
@@ -17,9 +20,9 @@ public class DossierTextField implements TextField{
 		this.setPosX(posX);
 		this.setComposant(composant);
 		
-		JTextField tf = new JTextField(valeur);
-		tf.setName(nom);
-		tf.setBounds(280, posX, 200, 16);
+		this.tf = new JTextField(valeur);
+		this.tf.setName(nom);
+		this.tf.setBounds(280, posX, 200, 16);
 		composant.add(tf);
 	}
 		@Override
@@ -30,6 +33,11 @@ public class DossierTextField implements TextField{
 	@Override
 	public void setValeur(String valeur) {
 		this.valeur = valeur;
+	}
+	
+	@Override
+	public void setFont(Font font) {
+		this.tf.setFont(font);
 	}
 
 	// Pour savoir si le text field sera visible ou non

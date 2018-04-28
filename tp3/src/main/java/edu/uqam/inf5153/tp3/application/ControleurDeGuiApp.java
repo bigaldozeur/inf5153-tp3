@@ -49,16 +49,17 @@ public class ControleurDeGuiApp {
 	/**
 	 * Permet de créer l'utilisateur et son mot de passe, s'il n'existe pas, le crée. (Pour les besoin du TP seulement)
 	 * @param sb 
+	 * @param persoMed : personnel médical (autre que médecin)
 	 * @throws Exception 
 	 * @throws SQLException 
 	 * @throws ClassNotFoundException 
 	 * retourne un message sur le résultat
 	 * */
-	public boolean creerVerifierSession(String user, char[] password, StringBuilder sb) throws ClassNotFoundException, SQLException, Exception {
+	public boolean creerVerifierSession(String user, char[] password, StringBuilder sb, boolean persoMed) throws ClassNotFoundException, SQLException, Exception {
 								
 		String mp = String.valueOf(password);
 		if(!ControlleurDeBdSecurite.utilisateurExiste(user)){
-				ControlleurDeBdSecurite.creerUtilisateur(user, mp);	
+				ControlleurDeBdSecurite.creerUtilisateur(user, mp, persoMed);	
 				sb.append("Utilisateur créé avec succès!");
 			return true;
 		}

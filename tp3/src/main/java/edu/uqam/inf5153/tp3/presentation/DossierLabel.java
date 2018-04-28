@@ -1,5 +1,7 @@
 package edu.uqam.inf5153.tp3.presentation;
 
+import java.awt.Font;
+
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 
@@ -9,7 +11,7 @@ public class DossierLabel implements Label {
 	private String nom = "";
 	private int posX = 0;
 	private JComponent composant = null;
-	
+	private JLabel label = null;
 
 	public DossierLabel(String nom, String valeur, int posX, JComponent composant) {
 		this.nom = nom;
@@ -17,9 +19,9 @@ public class DossierLabel implements Label {
 		this.setPosX(posX);
 		this.setComposant(composant);
 		
-		JLabel label = new JLabel(valeur);
-		label.setName(nom);
-		label.setBounds(50, posX, 200, 14);
+		this.label = new JLabel(valeur);
+		this.label.setName(nom);
+		this.label.setBounds(50, posX, 200, 14);
     	composant.add(label);
 	}
 	
@@ -32,7 +34,12 @@ public class DossierLabel implements Label {
 	public void setValeur(String valeur) {
 		this.valeur = valeur;
 	}
-
+	
+	@Override
+	public void setFont(Font font) {
+		this.label.setFont(font);
+	}
+	
 	public int getPosX() {
 		return posX;
 	}

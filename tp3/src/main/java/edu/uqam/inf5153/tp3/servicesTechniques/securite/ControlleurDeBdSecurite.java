@@ -48,7 +48,7 @@ public class ControlleurDeBdSecurite {
 		return authificationEstValide;
 	}
 	
-	public static void creerUtilisateur(String utilisateur,String pwd) throws Exception{
+	public static void creerUtilisateur(String utilisateur,String pwd, boolean persoMed) throws Exception{
 		
 	    
 	    if( !Connexion.estConnecter() || conn == null ){
@@ -58,13 +58,14 @@ public class ControlleurDeBdSecurite {
 	    
 	    String pwdhash = "";
 	    pwdhash = EncrypterString.encrypter(pwd);
-	    String sql = "insert into utilisateurs(utilisateur, pwdhash) values (?,?)";
-	    PreparedStatement pstmt = conn.prepareStatement(sql);
+	    String sql = "insert into utilisateurs(utilisateur, pwdhash, persoMed) values (?,?,?)";
+	    PreparedStatement pstmt = conn.prepareStatement(sql); 	
 	    
 	    pstmt.setString(1, utilisateur);
 	    pstmt.setString(2,pwdhash);
+	    int pm = persoMed == false?0:1;
+	    pstmt.setInt(3, pm);
 	   
-	    
 	    pstmt.executeUpdate();
 	}
 	public static boolean utilisateurExiste(String utilisateur) throws ClassNotFoundException, SQLException{

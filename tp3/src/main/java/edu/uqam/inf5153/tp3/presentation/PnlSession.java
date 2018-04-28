@@ -14,13 +14,17 @@ import java.awt.event.ActionEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.Rectangle;
+import javax.swing.JCheckBox;
+import java.awt.event.ItemListener;
+import java.awt.event.ItemEvent;
 
 public class PnlSession extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	private JTextField textField;
 	private JPasswordField passwordField;
-	
+	private boolean personnelMedical = false;
+	 	
 	/**
 	 * Create the panel.
 	 * @param aidePanneau 
@@ -87,6 +91,20 @@ public class PnlSession extends JPanel {
 		btnCreateNewUser.setFont(new Font("Tahoma", Font.BOLD, 11));
 		btnCreateNewUser.setBounds(255, 168, 185, 23);
 		add(btnCreateNewUser);
+		
+		JCheckBox chckbxPersoMedical = new JCheckBox("Personnel médical");
+		chckbxPersoMedical.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent arg0) {
+				 
+				if(arg0.getStateChange() == ItemEvent.SELECTED)
+					personnelMedical = true;
+				else 
+					personnelMedical = false;
+			}
+		});
+		chckbxPersoMedical.setToolTipText("Permet seulement de consulter les dossiers");
+		chckbxPersoMedical.setBounds(255, 198, 132, 23);
+		add(chckbxPersoMedical);
 
 	}
 	
@@ -129,7 +147,7 @@ public class PnlSession extends JPanel {
 	private void creerUtilisateur() {
 		try {
 				StringBuilder sb = new StringBuilder();
-				boolean result = SessionFrm.controleurGui.creerVerifierSession(textField.getText(), passwordField.getPassword(), sb);
+				boolean result = SessionFrm.controleurGui.creerVerifierSession(textField.getText(), passwordField.getPassword(), sb, personnelMedical);
 				if(result == false) {
 					JOptionPane.showMessageDialog(SessionFrm.mainWindow.frmDossierMdicalCentralis,sb.toString(),"Authentification",JOptionPane.ERROR_MESSAGE);
 				}
@@ -151,5 +169,4 @@ public class PnlSession extends JPanel {
 		}
 
 	}
-
 }

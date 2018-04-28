@@ -33,7 +33,7 @@ public class PnlNoDossier extends JPanel {
 			@Override
 			public void keyPressed(KeyEvent e) {
 				if(e.getKeyCode() == KeyEvent.VK_ENTER) {
-					verifierNoRamq();
+					getPnlDossier();
 				}
 			}
 		};
@@ -49,7 +49,7 @@ public class PnlNoDossier extends JPanel {
 		btnOk.addKeyListener(lKeyChk);
 		btnOk.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				verifierNoRamq();
+				getPnlDossier();
 			}
 		});
 		btnOk.setBounds(378, 79, 89, 23);
@@ -57,7 +57,7 @@ public class PnlNoDossier extends JPanel {
 
 	}
 	
-	void verifierNoRamq() {
+	void getPnlDossier() {
 			try {
 				if(SessionFrm.controleurGui.existe(textNoRamq.getText())) {
 					PnlDossier pnlDossier = new PnlDossier(textNoRamq.getText());
