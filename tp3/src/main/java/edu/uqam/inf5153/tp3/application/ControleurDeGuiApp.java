@@ -143,6 +143,7 @@ public class ControleurDeGuiApp extends Observateur {
 	/**
 	 * Pour savoir si on a le droit de modifier les champs text ou pas.
 	 * */
+	@SuppressWarnings("finally")
 	public boolean getEnableChamp(String utilisateur) {
 			boolean isPerMed = true;
 			try {
@@ -154,21 +155,6 @@ public class ControleurDeGuiApp extends Observateur {
 			finally {
 				return (isPerMed==true?false:true);
 			}
-	}
-
-	public boolean VerifierUtilisateur(String utilisateur) {
-		boolean isPerMed = true;
-		try {
-			isPerMed = ControlleurDeBdSecurite.isPersonnelMedical(utilisateur);			
-			maSession.setPersoMed(isPerMed);
-				
-		} catch (Exception e) {
-			// TODO : on fait quoi ici?
-		}
-		finally {
-			maSession.setPersoMed(isPerMed);
-			return isPerMed;
-		}
 	}
 	
 	 @Override

@@ -37,11 +37,8 @@ public class Session {
 	}
 	public void setMotPasse(char[] pwd){
 		motPasse = String.valueOf(pwd);
-		//motPasse = pwd.toString();
-	
-		
 	}
-	public boolean isPersoMed() {
+public boolean isPersoMed() {
 		return persoMed;
 	}
 
