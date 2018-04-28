@@ -7,43 +7,25 @@ import org.json.simple.parser.ParseException;
 
 import com.google.gson.Gson;
 
-import edu.uqam.inf5153.tp3.application.ControleurDeGuiApp;
 import edu.uqam.inf5153.tp3.servicesTechniques.ControlleurDeBd;
 
 public class GestionDossier {
-	
+	ControlleurDeBd cbd = new ControlleurDeBd();
 	public GestionDossier(){
 		
 	}
 	
-	public boolean existe(String noRamq) {
-		try {
-			if(noRamq != null || ControlleurDeBd.dossierExiste(noRamq))
-				return true;
-			else
-				return false;
-		} catch (ClassNotFoundException e) {
-			return false;
-		} catch (SQLException e) {
-			return false;
-		}
+	public boolean existe(String noRamq) throws ClassNotFoundException, SQLException {
+		
+		return cbd.dossierExiste(noRamq);
+		
 	}
 	
-	public boolean modifier(String noRamq, Object obj) throws ParseException {
+	public void modifier(String noRamq, Object obj) throws ParseException, ClassNotFoundException, SQLException {
 		Gson dossierJson = new Gson();
 		dossierJson = (Gson)obj;
-		try {
-			if(noRamq != null){
-				ControlleurDeBd.modifier(noRamq, dossierJson.toString());
-				return true;
-			}
-			else
-				return false;
-		} catch (ClassNotFoundException e) {
-			return false;
-		} catch (SQLException e) {
-			return false;
-		}
+		cbd.modifier(noRamq, dossierJson.toString());
+		
 	}
 	
 	/**
@@ -57,7 +39,7 @@ public class GestionDossier {
 	public Dossier rechercher(String noRamq) throws ClassNotFoundException, SQLException {
 		
 		ResultSet rs;
-		rs = ControlleurDeBd.consulterDossier(noRamq);
+		rs = cbd.consulterDossier(noRamq);
 		Dossier dossier = null;
 		while(rs.next()) {
 			dossier = jsonStrToDossier(rs.getString("dossier"));

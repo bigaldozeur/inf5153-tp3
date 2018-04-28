@@ -22,7 +22,7 @@ public class ControlleurDeBd  {
 		conn = Connexion.connecter();
 	}
 	
-	public static void initialiserBD(){
+	public  void initialiserBD(){
 		
 		 
 		/*
@@ -36,7 +36,7 @@ public class ControlleurDeBd  {
 		
 	*/
 	}
-	public static ResultSet obtenirHistorique(String numAssuranceMaladie) throws ClassNotFoundException, SQLException{
+	public  ResultSet obtenirHistorique(String numAssuranceMaladie) throws ClassNotFoundException, SQLException{
 		if( !Connexion.estConnecter() || conn == null ){
 			seConnecter();
 		}
@@ -47,7 +47,7 @@ public class ControlleurDeBd  {
 		return rs;
 	}
 	
-	public static ResultSet obtenirListeMedecinTraitant(String numAssuranceMaladie) throws ClassNotFoundException, SQLException{
+	public  ResultSet obtenirListeMedecinTraitant(String numAssuranceMaladie) throws ClassNotFoundException, SQLException{
 		if( !Connexion.estConnecter() || conn == null ){
 			seConnecter();
 		}
@@ -60,7 +60,7 @@ public class ControlleurDeBd  {
 		return rs;
 	}
 	
-	public static ResultSet consulterDossier(String numAssuranceMaladie) throws ClassNotFoundException, SQLException{
+	public  ResultSet consulterDossier(String numAssuranceMaladie) throws ClassNotFoundException, SQLException{
 		if( !Connexion.estConnecter() || conn == null ){
 			seConnecter();
 		}
@@ -75,7 +75,7 @@ public class ControlleurDeBd  {
 		return rs;
 	}
 	
-	public static ResultSet consulterDossier(String numAssuranceMaladie, String date) throws ClassNotFoundException, SQLException{
+	public  ResultSet consulterDossier(String numAssuranceMaladie, String date) throws ClassNotFoundException, SQLException{
 		if( !Connexion.estConnecter() || conn == null ){
 			seConnecter();
 		}
@@ -90,7 +90,7 @@ public class ControlleurDeBd  {
 		return rs;
 	}
 	
-	public static boolean dossierExiste(String numAssuranceMaladie) throws ClassNotFoundException, SQLException{
+	public  boolean dossierExiste(String numAssuranceMaladie) throws ClassNotFoundException, SQLException{
 		if( !Connexion.estConnecter() || conn == null ){
 			seConnecter();
 		}
@@ -108,7 +108,7 @@ public class ControlleurDeBd  {
 	}
 	
 	
-	public static void ajouter(String numAssuranceMaladie , String dossierJson) throws ParseException, ClassNotFoundException, SQLException{
+	public  void ajouter(String numAssuranceMaladie , String dossierJson) throws ParseException, ClassNotFoundException, SQLException{
 		JSONParser parser = new JSONParser();
     	Object obj = null;
 		obj = parser.parse(dossierJson);
@@ -134,7 +134,7 @@ public class ControlleurDeBd  {
         
 	}
 	
-	public static void modifier(String numAssuranceMaladie , String dossierJson) throws ParseException, ClassNotFoundException, SQLException{
+	public  void modifier(String numAssuranceMaladie , String dossierJson) throws ParseException, ClassNotFoundException, SQLException{
 		
 		ajouter(numAssuranceMaladie, dossierJson);
 		
