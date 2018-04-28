@@ -7,19 +7,31 @@ import org.json.simple.parser.ParseException;
 import com.google.gson.Gson;
 
 import edu.uqam.inf5153.tp3.application.session.Session;
+import edu.uqam.inf5153.tp3.domaine.Observateur;
 import edu.uqam.inf5153.tp3.domaine.Dossier;
 import edu.uqam.inf5153.tp3.domaine.GestionDossier;
 import edu.uqam.inf5153.tp3.servicesTechniques.securite.ControlleurDeBdSecurite;
-
-public class ControleurDeGuiApp {
+/*
+ * Design pattern Observer (méthode update)
+ * inspiré de : https://www.tutorialspoint.com/design_pattern/observer_pattern.htm
+ * 
+ * design pattern facade
+ * */
+public class ControleurDeGuiApp extends Observateur {
 	
 	private Session maSession = null;
-	GestionDossier gd = null;
+	private GestionDossier gd = null;
+	private String noRamq = ""; 
+	
 	public ControleurDeGuiApp(){
+		
 		maSession = new Session();
 		gd = new GestionDossier();
 	}
 	
+	public void setNoRamq(String noRamq){
+		this.noRamq = noRamq;
+	}
 	
 	/**
 	 * Permet de modifier un dossier
@@ -118,7 +130,11 @@ public class ControleurDeGuiApp {
 		return gd.rechercher(noRAMQ);
 	}
 	
-	
+	 @Override
+	 public void update() {
+System.out.println("modification est survenur");
+
+}
 
 	
 }

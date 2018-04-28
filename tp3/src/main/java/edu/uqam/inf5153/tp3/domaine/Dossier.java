@@ -1,8 +1,17 @@
 package edu.uqam.inf5153.tp3.domaine;
 
-import javax.swing.JComponent;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.swing.JComponent;
+/*
+ * Design pattern Observer
+ * inspiré de : https://www.tutorialspoint.com/design_pattern/observer_pattern.htm
+ * voir : classe Observateur et méthode attach et informerLesUtilisateurs
+ * */
 public class Dossier {
+	private List<Observateur> observateurs = new ArrayList<Observateur>();
+
 	
 	
 	private String maladie = new String();
@@ -15,8 +24,8 @@ public class Dossier {
 	private String mere = new String();
 	private String villeNaissance = new String();
 	private Coordonnees coor = new Coordonnees();
-	private Visite[] visites;
-	private Antecedent[] antecedents;
+	private ArrayList<Visite> visites = new ArrayList<>();
+	private ArrayList<Antecedent> antecedents = new ArrayList<>();
 	
 	public Dossier(){}
 	
@@ -33,12 +42,14 @@ public class Dossier {
 	}
 	public void setMaladie(String maladie) {
 		this.maladie = maladie;
+		informerLesObservateurs();
 	}
 	public String getMedecin() {
 		return medecin;
 	}
 	public void setMedecin(String medecin) {
 		this.medecin = medecin;
+		informerLesObservateurs();
 	}
 
 	public String getGenre() {
@@ -47,6 +58,7 @@ public class Dossier {
 
 	public void setGenre(GENRE genre) {
 		this.genre = genre;
+		informerLesObservateurs();
 	}
 
 	public String getDateDeNaissance() {
@@ -70,20 +82,23 @@ public class Dossier {
 	}
 
 	public Antecedent[] getAntecedents() {	
-		if(antecedents == null) {
-			// TODO : enlever, c'est un antécédent par défaut en attendant pour voir
-			Antecedent ant = new Antecedent("Le diagnostique est...", 
-					"Le traitement est ...\r\n Je ne sais pas",
-					new Personne("nom", "prenom"),
-					"2000-01-01", 
-					"2000-02-02");
-			
-			antecedents = new Antecedent[]{ant};	
-		}
-		return antecedents;
+		Antecedent[] ant = new Antecedent[antecedents.size()];;
+		ant = antecedents.toArray(ant);
+		return ant;
 	}
 	
+	public void setAntecedents(Antecedent ant) {	
+		antecedents.add(ant);
+		informerLesObservateurs();
+		
+	}
 	public Visite[] getVisites() {
+		
+		Visite[] vis = new Visite[visites.size()];;
+		vis = visites.toArray(vis);
+		return vis;
+		
+		/*
 		if(visites == null) {
 			// TODO : enlever, c'est une visite par défaut
 			Visite vis = new Visite(new Etablissement("etablissement 1", new Adresse()),
@@ -96,12 +111,24 @@ public class Dossier {
 			
 			visites = new Visite[]{vis};
 		}
-			
-		return visites;
+		*/
+		//return visites;
 	}
-
+	public void setVisite(Visite vis) {	
+		visites.add(vis);
+		informerLesObservateurs();
+		
+	}
 	public boolean getPersoMed() {
 		return this.persoMed == 0 ?false:true;
 	}
+	public void attach(Observateur obs){
+		observateurs.add(obs);		
+	}
 
+	public void informerLesObservateurs(){
+		for (Observateur observateur : observateurs) {
+			observateur.update();
+		}
+	} 	
 }
