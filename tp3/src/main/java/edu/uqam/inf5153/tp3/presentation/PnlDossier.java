@@ -5,22 +5,17 @@ import java.sql.SQLException;
 
 
 import javax.swing.JLabel;
-import javax.swing.JTextField;
-import javax.swing.table.DefaultTableModel;
 import javax.swing.JScrollPane;
 
 import edu.uqam.inf5153.tp3.application.ControleurDeGuiApp;
 import edu.uqam.inf5153.tp3.domaine.Antecedent;
 import edu.uqam.inf5153.tp3.domaine.Dossier;
 import edu.uqam.inf5153.tp3.domaine.Visite;
-import edu.uqam.inf5153.tp3.servicesTechniques.securite.ControlleurDeBdSecurite;
 
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
 import java.awt.Rectangle;
 
 public class PnlDossier extends JScrollPane {
@@ -94,6 +89,19 @@ public class PnlDossier extends JScrollPane {
     	antecedents = dossier.getAntecedents();
 
     	posX = AidePanneau.getInstance().AjouterEntreePanneau("Antecedents médicaux : " + (antecedents.length >0?"":"aucun"), "", false, posX, 20, enableChamp, this);
+    	
+    	// Si c'est un médecin seulement on peut afficher le bouton pour ajouter des antecedents, si c'est un personnel médical, on ne peut pas.
+    	if(enableChamp) {
+	    	JButton btnAddAntecedent = new JButton("Ajouter un antécedent");
+			btnAddAntecedent.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					SessionFrm.mainWindow.frmDossierMdicalCentralis.setContentPane(new PnlAntecedent(noRAMQ, dossier, user));
+					SessionFrm.mainWindow.frmDossierMdicalCentralis.revalidate();
+				}
+			});
+			btnAddAntecedent.setBounds(658, posX-bond, 189, 23);
+			add(btnAddAntecedent);
+    	}
     	
     	// Afficher la liste des antecedents medicaux.
     	for(int i = 0; i<antecedents.length; i++)

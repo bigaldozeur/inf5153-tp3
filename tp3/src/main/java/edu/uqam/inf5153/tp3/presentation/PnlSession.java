@@ -130,8 +130,6 @@ public class PnlSession extends JPanel {
 					return;
 				}
 				if(SessionFrm.controleurGui.verifierAuthentifier(textField.getText(), passwordField.getPassword())) {
-						boolean isPersMed = SessionFrm.controleurGui.VerifierUtilisateur(textField.getText());
-						SessionFrm.mainWindow.setPersMed(isPersMed);
 						SessionFrm.mainWindow.frmDossierMdicalCentralis.setContentPane(new PnlNoDossier(textField.getText()));
 						SessionFrm.mainWindow.frmDossierMdicalCentralis.revalidate();
 				}

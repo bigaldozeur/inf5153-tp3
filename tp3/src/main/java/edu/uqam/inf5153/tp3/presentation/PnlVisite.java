@@ -49,19 +49,9 @@ public class PnlVisite extends JPanel {
 		setLayout(null);
 		JButton btnRetour = new JButton("Retour");
 		btnRetour.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				PnlDossier pnlDossier;
+			public void actionPerformed(ActionEvent e) {	
 				try {
-					pnlDossier = new PnlDossier(noRAMQ, user);
-					JScrollPane sp = new JScrollPane(pnlDossier);
-					sp.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-					sp.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-					sp.setBounds(50, 30, 400, 100);
-					
-					SessionFrm.mainWindow.frmDossierMdicalCentralis.getContentPane().add(sp);
-					
-					SessionFrm.mainWindow.frmDossierMdicalCentralis.setContentPane(sp);
-					SessionFrm.mainWindow.frmDossierMdicalCentralis.setVisible(true);
+					AidePanneau.getInstance().retourAuDossier(noRAMQ, user);
 				} catch (ClassNotFoundException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -76,16 +66,16 @@ public class PnlVisite extends JPanel {
 		int posX = 120;
 		int bond = 20;
 		 
-		posX = AidePanneau.getInstance().AjouterEntreePanneau("NomEtablissement", "Établissement : ", "Hôpital du médecin", posX, false, this);
+		posX = AidePanneau.getInstance().AjouterEntreePanneau("NomEtablissement", "Établissement : ", "Hôpital du médecin", posX, true, this);
 		
-		posX = AidePanneau.getInstance().AjouterEntreePanneau("Médecin vu: ", "", false, posX, bond, false, this);
-		posX = AidePanneau.getInstance().AjouterEntreePanneau("NomMed", "Nom : ", "", posX, false, this);
-		posX = AidePanneau.getInstance().AjouterEntreePanneau("PrenomMed","Prénom : ", "", posX, false, this);
-		posX = AidePanneau.getInstance().AjouterEntreePanneau("DateVisite", "Date de la visite: ", "", posX, false,this);		
-		posX = AidePanneau.getInstance().AjouterEntreePanneau("Diagnostique","Diagnostique établi, si applicable : ", "", posX, false, this);
-		posX = AidePanneau.getInstance().AjouterEntreePanneau("Traitement","Traitement, si applicable : ", "", posX, false, this);
-		posX = AidePanneau.getInstance().AjouterEntreePanneau("Resume", "Résumé de la visite : ", "", posX, false, this);
-		posX = AidePanneau.getInstance().AjouterEntreePanneau("Notes","Notes pour les autres médecins : ", "", posX, false, this);
+		posX = AidePanneau.getInstance().AjouterEntreePanneau("Médecin vu: ", "", false, posX, bond, true, this);
+		posX = AidePanneau.getInstance().AjouterEntreePanneau("NomMed", "Nom : ", "", posX, true, this);
+		posX = AidePanneau.getInstance().AjouterEntreePanneau("PrenomMed","Prénom : ", "", posX, true, this);
+		posX = AidePanneau.getInstance().AjouterEntreePanneau("DateVisite", "Date de la visite: ", "", posX, true,this);		
+		posX = AidePanneau.getInstance().AjouterEntreePanneau("Diagnostique","Diagnostique établi, si applicable : ", "", posX, true, this);
+		posX = AidePanneau.getInstance().AjouterEntreePanneau("Traitement","Traitement, si applicable : ", "", posX, true, this);
+		posX = AidePanneau.getInstance().AjouterEntreePanneau("Resume", "Résumé de la visite : ", "", posX, true, this);
+		posX = AidePanneau.getInstance().AjouterEntreePanneau("Notes","Notes pour les autres médecins : ", "", posX, true, this);
 		
 		Visite vis = new Visite();
 		HashMap<String,Component> componentMap = createComponentMap(this); // pris exemple ici et modifié. https://stackoverflow.com/questions/4958600/get-a-swing-component-by-name

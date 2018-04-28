@@ -1,8 +1,10 @@
 package edu.uqam.inf5153.tp3.presentation;
 
 import java.awt.Font;
+import java.sql.SQLException;
 
 import javax.swing.JComponent;
+import javax.swing.JScrollPane;
 
 
 // Singleton
@@ -55,5 +57,19 @@ public class AidePanneau {
     	return posX;
 	}
 
+	public void retourAuDossier(final String noRAMQ, final String user)
+			throws ClassNotFoundException, SQLException {
+		PnlDossier pnlDossier;
+		pnlDossier = new PnlDossier(noRAMQ, user);
+		JScrollPane sp = new JScrollPane(pnlDossier);
+		sp.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		sp.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		sp.setBounds(50, 30, 400, 100);
+		
+		SessionFrm.mainWindow.frmDossierMdicalCentralis.getContentPane().add(sp);
+		
+		SessionFrm.mainWindow.frmDossierMdicalCentralis.setContentPane(sp);
+		SessionFrm.mainWindow.frmDossierMdicalCentralis.setVisible(true);
+	}
 
 }
