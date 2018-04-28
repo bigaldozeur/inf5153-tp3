@@ -11,6 +11,21 @@ import edu.uqam.inf5153.tp3.servicesTechniques.securite.ControlleurDeBdSecurite;
 public class Session {
 	private String utilisateur = "";
 	private String motPasse="";
+	private boolean persoMed = true; 
+	
+	public Session(){
+		
+	
+	}
+	
+	public boolean authentifier() throws Exception  {
+		
+			boolean auth = ControlleurDeBdSecurite.authentifier(utilisateur, motPasse);
+			if(auth)
+				this.setPersoMed(ControlleurDeBdSecurite.isPersonnelMedical(utilisateur));
+			return auth;
+	}
+
 	public String getUtilisateur(){
 		return utilisateur;
 	}
@@ -26,38 +41,12 @@ public class Session {
 	
 		
 	}
-	public Session(){
-		
-	
-	}
-	
-	
-	public boolean authentifier() throws Exception  {
-		
-			boolean auth = ControlleurDeBdSecurite.authentifier(utilisateur, motPasse);
-			return auth;
+	public boolean isPersoMed() {
+		return persoMed;
 	}
 
-/*	
-	public boolean authentifier(){
-		System.setProperty("java.security.auth.login.config", "DossierMedical.config");
-		LoginContext login = null;
-		try {
-			login = new LoginContext("DossierMedicalConfig", new ControlleurLogin());
-		} catch (LoginException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-	//	while(true){
-			try{
-				login.login();
-				return true;
-			}catch(LoginException e){
-				//System.out.println(e.getMessage());
-				return false;
-			}
-		}
-	//}
-*/
+	
+	public void setPersoMed(boolean persoMed) {
+		this.persoMed = persoMed;
+	}
 }

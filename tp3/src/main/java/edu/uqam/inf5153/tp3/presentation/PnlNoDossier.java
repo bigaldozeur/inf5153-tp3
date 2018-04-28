@@ -21,7 +21,7 @@ public class PnlNoDossier extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public PnlNoDossier() {
+	public PnlNoDossier(final String user) {
 		setLayout(null);
 		
 		JLabel lblDossierMdical = new JLabel("Dossier médical");
@@ -33,7 +33,7 @@ public class PnlNoDossier extends JPanel {
 			@Override
 			public void keyPressed(KeyEvent e) {
 				if(e.getKeyCode() == KeyEvent.VK_ENTER) {
-					getPnlDossier();
+					getPnlDossier(user);
 				}
 			}
 		};
@@ -49,7 +49,7 @@ public class PnlNoDossier extends JPanel {
 		btnOk.addKeyListener(lKeyChk);
 		btnOk.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				getPnlDossier();
+				getPnlDossier(user);
 			}
 		});
 		btnOk.setBounds(378, 79, 89, 23);
@@ -57,10 +57,10 @@ public class PnlNoDossier extends JPanel {
 
 	}
 	
-	void getPnlDossier() {
+	void getPnlDossier(String user) {
 			try {
 				if(SessionFrm.controleurGui.existe(textNoRamq.getText())) {
-					PnlDossier pnlDossier = new PnlDossier(textNoRamq.getText());
+					PnlDossier pnlDossier = new PnlDossier(textNoRamq.getText(), user);
 					
 					JScrollPane sp = new JScrollPane(pnlDossier);
 					sp.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);

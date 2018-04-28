@@ -12,6 +12,7 @@ public class SessionFrm {
 	public JFrame frmDossierMdicalCentralis;
 	protected static SessionFrm mainWindow;
 	private boolean initialise = false;
+	protected static boolean isPersMed = true; // TODO : éventuellement deplacer dans autorisation. Le Personnel Médical ne peut pas changer les choses
 	static ControleurDeGuiApp controleurGui;
 	/**
 	 * Launch the application.
@@ -64,4 +65,5 @@ public class SessionFrm {
 		frmDossierMdicalCentralis.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmDossierMdicalCentralis.getContentPane().setLayout(null);
 	}
+
 }

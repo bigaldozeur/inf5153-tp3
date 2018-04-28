@@ -130,7 +130,9 @@ public class PnlSession extends JPanel {
 					return;
 				}
 				if(SessionFrm.controleurGui.verifierAuthentifier(textField.getText(), passwordField.getPassword())) {
-						SessionFrm.mainWindow.frmDossierMdicalCentralis.setContentPane(new PnlNoDossier());
+						boolean isPersMed = SessionFrm.controleurGui.VerifierUtilisateur(textField.getText());
+						SessionFrm.mainWindow.setPersMed(isPersMed);
+						SessionFrm.mainWindow.frmDossierMdicalCentralis.setContentPane(new PnlNoDossier(textField.getText()));
 						SessionFrm.mainWindow.frmDossierMdicalCentralis.revalidate();
 				}
 				else{
@@ -155,7 +157,7 @@ public class PnlSession extends JPanel {
 					JOptionPane.showMessageDialog(SessionFrm.mainWindow.frmDossierMdicalCentralis,sb.toString(),"Authentification",JOptionPane.INFORMATION_MESSAGE);
 				
 					if(SessionFrm.controleurGui.verifierAuthentifier(textField.getText(), passwordField.getPassword())) {
-							SessionFrm.mainWindow.frmDossierMdicalCentralis.setContentPane(new PnlNoDossier());
+							SessionFrm.mainWindow.frmDossierMdicalCentralis.setContentPane(new PnlNoDossier(textField.getText()));
 							SessionFrm.mainWindow.frmDossierMdicalCentralis.revalidate();
 					}
 					else{

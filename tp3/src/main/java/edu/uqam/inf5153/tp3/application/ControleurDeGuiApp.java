@@ -9,6 +9,7 @@ import com.google.gson.Gson;
 import edu.uqam.inf5153.tp3.application.session.Session;
 import edu.uqam.inf5153.tp3.domaine.Dossier;
 import edu.uqam.inf5153.tp3.domaine.GestionDossier;
+import edu.uqam.inf5153.tp3.presentation.SessionFrm;
 import edu.uqam.inf5153.tp3.servicesTechniques.securite.ControlleurDeBdSecurite;
 
 public class ControleurDeGuiApp {
@@ -100,7 +101,7 @@ public class ControleurDeGuiApp {
 		maSession.setUtilisateur(user);
 		String mp = String.valueOf(password);
 		maSession.setMotPasse(mp.toCharArray());
-
+		
 		try {
 			if(maSession.authentifier()){
 				return true;
@@ -116,6 +117,46 @@ public class ControleurDeGuiApp {
 	public Dossier getDossier(String noRAMQ) throws ClassNotFoundException, SQLException {
 		
 		return gd.rechercher(noRAMQ);
+	}
+
+	/**
+	 * Pour savoir si on a le droit de modifier les champs text ou pas.
+	 * */
+	public boolean getEnableChamp() {
+		if(maSession.isPersoMed())
+			return false;
+		else 
+			return true;
+	}
+	/**
+	 * Pour savoir si on a le droit de modifier les champs text ou pas.
+	 * */
+	public boolean getEnableChamp(String utilisateur) {
+			boolean isPerMed = true;
+			try {
+				isPerMed = ControlleurDeBdSecurite.isPersonnelMedical(utilisateur);			
+				return (isPerMed==true?false:true);	
+			} catch (Exception e) {
+				// TODO : on fait quoi ici?
+			}
+			finally {
+				return (isPerMed==true?false:true);
+			}
+	}
+
+	public boolean VerifierUtilisateur(String utilisateur) {
+		boolean isPerMed = true;
+		try {
+			isPerMed = ControlleurDeBdSecurite.isPersonnelMedical(utilisateur);			
+			maSession.setPersoMed(isPerMed);
+				
+		} catch (Exception e) {
+			// TODO : on fait quoi ici?
+		}
+		finally {
+			maSession.setPersoMed(isPerMed);
+			return isPerMed;
+		}
 	}
 	
 	

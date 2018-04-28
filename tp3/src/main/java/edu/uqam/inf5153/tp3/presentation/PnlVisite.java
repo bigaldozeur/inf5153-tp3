@@ -37,14 +37,14 @@ public class PnlVisite extends JPanel {
 	 * Create the panel.
 	 */
 	public PnlVisite() {
-		init("", null);
+		init("", null, "");
 	}
 	
-	public PnlVisite(String noRAMQ, Dossier dossier) {
-		init(noRAMQ, dossier);
+	public PnlVisite(String noRAMQ, Dossier dossier, String user) {
+		init(noRAMQ, dossier, user);
 	}
 
-	private void init(final String noRAMQ, Dossier dossier) {
+	private void init(final String noRAMQ, Dossier dossier, final String user) {
 		
 		setLayout(null);
 		JButton btnRetour = new JButton("Retour");
@@ -52,7 +52,7 @@ public class PnlVisite extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				PnlDossier pnlDossier;
 				try {
-					pnlDossier = new PnlDossier(noRAMQ);
+					pnlDossier = new PnlDossier(noRAMQ, user);
 					JScrollPane sp = new JScrollPane(pnlDossier);
 					sp.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 					sp.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);

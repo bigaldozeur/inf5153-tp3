@@ -47,6 +47,23 @@ public class ControlleurDeBdSecurite {
 		rs.close();
 		return authificationEstValide;
 	}
+
+	public static boolean isPersonnelMedical(String utilisateur) throws Exception{
+		if( !Connexion.estConnecter() || conn == null ){
+			seConnecter();
+		}
+		String sql = "select persomed from utilisateurs where utilisateur=?";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, utilisateur);
+		ResultSet rs = pstmt.executeQuery();
+		
+		int personMed = rs.getInt("persomed");	
+		boolean permed = (personMed==1?true:false);
+		
+		rs.close();
+		return permed;
+	}
+
 	
 	public static void creerUtilisateur(String utilisateur,String pwd, boolean persoMed) throws Exception{
 		
