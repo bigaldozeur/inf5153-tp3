@@ -11,8 +11,8 @@ public class DossierLabelTextFactory implements LabelTextFactory {
 	}
 
 	@Override
-	public DossierTextField createTextField(String nom, String valeur, int posX, JComponent composant) {
-		return new DossierTextField(nom, valeur, posX, composant);
+	public DossierTextField createTextField(String nom, String valeur, int posX, boolean enable, JComponent composant) {
+		return new DossierTextField(nom, valeur, posX, enable, composant);
 	}
 
 }

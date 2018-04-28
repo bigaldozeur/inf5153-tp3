@@ -76,16 +76,16 @@ public class PnlVisite extends JPanel {
 		int posX = 120;
 		int bond = 20;
 		 
-		posX = AidePanneau.getInstance().AjouterEntreePanneau("NomEtablissement", "Établissement : ", "Hôpital du médecin", posX, this);
+		posX = AidePanneau.getInstance().AjouterEntreePanneau("NomEtablissement", "Établissement : ", "Hôpital du médecin", posX, false, this);
 		
-		posX = AidePanneau.getInstance().AjouterEntreePanneau("Médecin vu: ", "", false, posX, bond, this);
-		posX = AidePanneau.getInstance().AjouterEntreePanneau("NomMed", "Nom : ", "", posX, this);
-		posX = AidePanneau.getInstance().AjouterEntreePanneau("PrenomMed","Prénom : ", "", posX, this);
-		posX = AidePanneau.getInstance().AjouterEntreePanneau("DateVisite", "Date de la visite: ", "", posX, this);		
-		posX = AidePanneau.getInstance().AjouterEntreePanneau("Diagnostique","Diagnostique établi, si applicable : ", "", posX, this);
-		posX = AidePanneau.getInstance().AjouterEntreePanneau("Traitement","Traitement, si applicable : ", "", posX, this);
-		posX = AidePanneau.getInstance().AjouterEntreePanneau("Resume", "Résumé de la visite : ", "", posX, this);
-		posX = AidePanneau.getInstance().AjouterEntreePanneau("Notes","Notes pour les autres médecins : ", "", posX, this);
+		posX = AidePanneau.getInstance().AjouterEntreePanneau("Médecin vu: ", "", false, posX, bond, false, this);
+		posX = AidePanneau.getInstance().AjouterEntreePanneau("NomMed", "Nom : ", "", posX, false, this);
+		posX = AidePanneau.getInstance().AjouterEntreePanneau("PrenomMed","Prénom : ", "", posX, false, this);
+		posX = AidePanneau.getInstance().AjouterEntreePanneau("DateVisite", "Date de la visite: ", "", posX, false,this);		
+		posX = AidePanneau.getInstance().AjouterEntreePanneau("Diagnostique","Diagnostique établi, si applicable : ", "", posX, false, this);
+		posX = AidePanneau.getInstance().AjouterEntreePanneau("Traitement","Traitement, si applicable : ", "", posX, false, this);
+		posX = AidePanneau.getInstance().AjouterEntreePanneau("Resume", "Résumé de la visite : ", "", posX, false, this);
+		posX = AidePanneau.getInstance().AjouterEntreePanneau("Notes","Notes pour les autres médecins : ", "", posX, false, this);
 		
 		Visite vis = new Visite();
 		HashMap<String,Component> componentMap = createComponentMap(this); // pris exemple ici et modifié. https://stackoverflow.com/questions/4958600/get-a-swing-component-by-name

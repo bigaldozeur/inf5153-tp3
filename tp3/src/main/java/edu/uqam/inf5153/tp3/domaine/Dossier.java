@@ -1,10 +1,13 @@
 package edu.uqam.inf5153.tp3.domaine;
 
+import javax.swing.JComponent;
+
 public class Dossier {
 	
 	
 	private String maladie = new String();
 	private String medecin = new String();
+	private int persoMed = 0; // Médecin = 0; Personnel médical = 1 (c'est un boolean, mais un int dans bd)
 	private Personne patient = new Personne();
 	private GENRE genre = GENRE.NOT_KNOWN;
 	private String dateDeNaissance = new String(); // TODO : Devrait être un champs Date
@@ -95,6 +98,10 @@ public class Dossier {
 		}
 			
 		return visites;
+	}
+
+	public boolean getPersoMed() {
+		return this.persoMed == 0 ?false:true;
 	}
 
 }

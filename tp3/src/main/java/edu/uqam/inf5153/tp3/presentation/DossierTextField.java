@@ -11,10 +11,11 @@ public class DossierTextField implements TextField{
 	private String valeur = "";
 	private boolean afficher= true;
 	private int posX = 0;
+	private boolean enable = true;
 	private JComponent composant = null;
 	JTextField tf = null;
 
-	public DossierTextField(String nom, String valeur, int posX, JComponent composant) {
+	public DossierTextField(String nom, String valeur, int posX, boolean enable, JComponent composant) {
 		this.nom = nom;
 		this.valeur= valeur;
 		this.setPosX(posX);
@@ -23,9 +24,12 @@ public class DossierTextField implements TextField{
 		this.tf = new JTextField(valeur);
 		this.tf.setName(nom);
 		this.tf.setBounds(280, posX, 200, 16);
+		this.tf.setEnabled(enable);
 		composant.add(tf);
 	}
-		@Override
+	
+	
+	@Override
 	public void setNom(String nom) {
 		this.nom = nom;
 	}

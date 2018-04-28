@@ -73,31 +73,31 @@ public class PnlDossier extends JScrollPane {
     	
     	dossier = cgui.getDossier(noRAMQ);
     	     	
-    	posX = AidePanneau.getInstance().AjouterEntreePanneau("Nom et prénom : ", dossier.getNom() + " " + dossier.getPrenom(), posX, this);     
-    	posX = AidePanneau.getInstance().AjouterEntreePanneau("Date de naissance : ", dossier.getDateDeNaissance(), posX, this);     
-    	posX = AidePanneau.getInstance().AjouterEntreePanneau("Genre : ", dossier.getGenre(), posX, this);
-    	posX = AidePanneau.getInstance().AjouterEntreePanneau("Parents connus : ", "", false, posX, 20, this);
-    	posX = AidePanneau.getInstance().AjouterEntreePanneau("Père : ", dossier.getPere(), posX, this);
-    	posX = AidePanneau.getInstance().AjouterEntreePanneau("Mère : ", dossier.getMere(), posX, this); 	
-    	posX = AidePanneau.getInstance().AjouterEntreePanneau("Ville de naissance : ", dossier.getVilleNaissance(), posX, this);
-    	posX = AidePanneau.getInstance().AjouterEntreePanneau("Coordonnées : ", dossier.getCoordonnees(), posX, this); 	
-    	posX = AidePanneau.getInstance().AjouterEntreePanneau("Numéro d'assurance maladie : ", noRAMQ, posX, this);
+    	posX = AidePanneau.getInstance().AjouterEntreePanneau("Nom et prénom : ", dossier.getNom() + " " + dossier.getPrenom(), posX, dossier.getPersoMed(), this);     
+    	posX = AidePanneau.getInstance().AjouterEntreePanneau("Date de naissance : ", dossier.getDateDeNaissance(), posX, dossier.getPersoMed(), this);     
+    	posX = AidePanneau.getInstance().AjouterEntreePanneau("Genre : ", dossier.getGenre(), posX, dossier.getPersoMed(), this);
+    	posX = AidePanneau.getInstance().AjouterEntreePanneau("Parents connus : ", "", false, posX, 20, dossier.getPersoMed(), this);
+    	posX = AidePanneau.getInstance().AjouterEntreePanneau("Père : ", dossier.getPere(), posX, dossier.getPersoMed(), this);
+    	posX = AidePanneau.getInstance().AjouterEntreePanneau("Mère : ", dossier.getMere(), posX, dossier.getPersoMed(), this); 	
+    	posX = AidePanneau.getInstance().AjouterEntreePanneau("Ville de naissance : ", dossier.getVilleNaissance(), posX, dossier.getPersoMed(), this);
+    	posX = AidePanneau.getInstance().AjouterEntreePanneau("Coordonnées : ", dossier.getCoordonnees(), posX,dossier.getPersoMed(),  this); 	
+    	posX = AidePanneau.getInstance().AjouterEntreePanneau("Numéro d'assurance maladie : ", noRAMQ, posX, true, this);
     	
     	posX += bond;
     	// Obtenir la liste des antécédents médicaux
     	Antecedent[] antecedents;
     	antecedents = dossier.getAntecedents();
 
-    	posX = AidePanneau.getInstance().AjouterEntreePanneau("Antecedents médicaux : " + (antecedents.length >0?"":"aucun"), "", false, posX, 20, this);
+    	posX = AidePanneau.getInstance().AjouterEntreePanneau("Antecedents médicaux : " + (antecedents.length >0?"":"aucun"), "", false, posX, 20, dossier.getPersoMed(), this);
     	
     	// Afficher la liste des antecedents medicaux.
     	for(int i = 0; i<antecedents.length; i++)
     	{
-    		posX = AidePanneau.getInstance().AjouterEntreePanneau("Diagnostique : ", antecedents[i].getDiagnostique(), posX, this);
-    		posX = AidePanneau.getInstance().AjouterEntreePanneau("Traitement : ", antecedents[i].getTraitement(), posX, this);
-    		posX = AidePanneau.getInstance().AjouterEntreePanneau("Médecin traitant : ", antecedents[i].getMedecinTraitant().toString(), posX, this);
-    		posX = AidePanneau.getInstance().AjouterEntreePanneau("Debut de la maladie : ", antecedents[i].getDebutMaladie(), posX, this);
-    		posX = AidePanneau.getInstance().AjouterEntreePanneau("Fin de la maladie : ", antecedents[i].getFinMaladie(), posX, this);
+    		posX = AidePanneau.getInstance().AjouterEntreePanneau("Diagnostique : ", antecedents[i].getDiagnostique(), posX, dossier.getPersoMed(), this);
+    		posX = AidePanneau.getInstance().AjouterEntreePanneau("Traitement : ", antecedents[i].getTraitement(), posX, dossier.getPersoMed(), this);
+    		posX = AidePanneau.getInstance().AjouterEntreePanneau("Médecin traitant : ", antecedents[i].getMedecinTraitant().toString(), posX, dossier.getPersoMed(), this);
+    		posX = AidePanneau.getInstance().AjouterEntreePanneau("Debut de la maladie : ", antecedents[i].getDebutMaladie(), posX, dossier.getPersoMed(), this);
+    		posX = AidePanneau.getInstance().AjouterEntreePanneau("Fin de la maladie : ", antecedents[i].getFinMaladie(), posX, dossier.getPersoMed(), this);
     	}
     	
     	
@@ -106,33 +106,36 @@ public class PnlDossier extends JScrollPane {
     	Visite[] visites;
     	visites = dossier.getVisites();
     	
-    	posX = AidePanneau.getInstance().AjouterEntreePanneau("Visites : " + (visites.length >0?"":"aucune"), "", false, posX, 20, this);
-    	JButton btnAddVisite = new JButton("Ajouter une visite");
-		btnAddVisite.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				SessionFrm.mainWindow.frmDossierMdicalCentralis.setContentPane(new PnlVisite(noRAMQ, dossier));
-				SessionFrm.mainWindow.frmDossierMdicalCentralis.revalidate();
-			}
-		});
-		btnAddVisite.setBounds(658, posX-bond, 189, 23);
-		add(btnAddVisite);
-		
+    	posX = AidePanneau.getInstance().AjouterEntreePanneau("Visites : " + (visites.length >0?"":"aucune"), "", false, posX, 20, dossier.getPersoMed(), this);
+    	// Si c'est un médecin seulement on peut afficher le bouton pour ajouter des visites, si c'est un personnel médical, on ne peut pas.
+    	if(dossier.getPersoMed() == false) {
+	    	JButton btnAddVisite = new JButton("Ajouter une visite");
+			btnAddVisite.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					SessionFrm.mainWindow.frmDossierMdicalCentralis.setContentPane(new PnlVisite(noRAMQ, dossier));
+					SessionFrm.mainWindow.frmDossierMdicalCentralis.revalidate();
+				}
+			});
+			btnAddVisite.setBounds(658, posX-bond, 189, 23);
+			add(btnAddVisite);
+    	}
+    	
     	// Afficher la liste des visites.
     	for(int i = 0; i<visites.length; i++)
     	{
-    		posX = AidePanneau.getInstance().AjouterEntreePanneau("Établissement visité : ", visites[i].getEtablissement().getNom(), posX, this);
-    		posX = AidePanneau.getInstance().AjouterEntreePanneau("Médecin vu : ", visites[i].getMedecinVu().toString(), posX, this);
-    		posX = AidePanneau.getInstance().AjouterEntreePanneau("Date de la visite: ", visites[i].getDate(), posX, this);		
-    		posX = AidePanneau.getInstance().AjouterEntreePanneau("Diagnostique établi, si applicable : ", visites[i].getDiagnostique(), posX, this);
-    		posX = AidePanneau.getInstance().AjouterEntreePanneau("Traitement, si applicable : ", visites[i].getTraitement(), posX, this);
-    		posX = AidePanneau.getInstance().AjouterEntreePanneau("Résumé de la visite : ", visites[i].getResume(), posX, this);
-    		posX = AidePanneau.getInstance().AjouterEntreePanneau("Notes pour les autres médecins : ", visites[i].getNotes(), posX, this);
+    		posX = AidePanneau.getInstance().AjouterEntreePanneau("Établissement visité : ", visites[i].getEtablissement().getNom(), posX, dossier.getPersoMed(), this);
+    		posX = AidePanneau.getInstance().AjouterEntreePanneau("Médecin vu : ", visites[i].getMedecinVu().toString(), posX, dossier.getPersoMed(), this);
+    		posX = AidePanneau.getInstance().AjouterEntreePanneau("Date de la visite: ", visites[i].getDate(), posX, dossier.getPersoMed(), this);		
+    		posX = AidePanneau.getInstance().AjouterEntreePanneau("Diagnostique établi, si applicable : ", visites[i].getDiagnostique(), posX, dossier.getPersoMed(), this);
+    		posX = AidePanneau.getInstance().AjouterEntreePanneau("Traitement, si applicable : ", visites[i].getTraitement(), posX, dossier.getPersoMed(), this);
+    		posX = AidePanneau.getInstance().AjouterEntreePanneau("Résumé de la visite : ", visites[i].getResume(), posX, dossier.getPersoMed(), this);
+    		posX = AidePanneau.getInstance().AjouterEntreePanneau("Notes pour les autres médecins : ", visites[i].getNotes(), posX, dossier.getPersoMed(), this);
     	}
     	
     	posX += bond;
     	
-    	posX = AidePanneau.getInstance().AjouterEntreePanneau("maladie : ", dossier.getMaladie(), posX, this); // TODO : à enlever, en attendant
-    	posX = AidePanneau.getInstance().AjouterEntreePanneau("medecin : ", dossier.getMedecin(), posX, this); // TODO : à enlever, en attendant
+    	posX = AidePanneau.getInstance().AjouterEntreePanneau("maladie : ", dossier.getMaladie(), posX, dossier.getPersoMed(), this); // TODO : à enlever, en attendant
+    	posX = AidePanneau.getInstance().AjouterEntreePanneau("medecin : ", dossier.getMedecin(), posX, dossier.getPersoMed(), this); // TODO : à enlever, en attendant
         
 	}
 }
