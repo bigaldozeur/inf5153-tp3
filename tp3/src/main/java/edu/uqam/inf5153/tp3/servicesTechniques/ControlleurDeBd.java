@@ -90,7 +90,7 @@ public class ControlleurDeBd  {
 		return rs;
 	}
 	
-	public static boolean rechercher(String numAssuranceMaladie) throws ClassNotFoundException, SQLException{
+	public static boolean dossierExiste(String numAssuranceMaladie) throws ClassNotFoundException, SQLException{
 		if( !Connexion.estConnecter() || conn == null ){
 			seConnecter();
 		}
@@ -103,6 +103,7 @@ public class ControlleurDeBd  {
 		ResultSet rs = pstmt.executeQuery();
 		if(rs.next())
 			return true;
+		
 		return false;
 	}
 	
@@ -134,6 +135,10 @@ public class ControlleurDeBd  {
 	}
 	
 	public static void modifier(String numAssuranceMaladie , String dossierJson) throws ParseException, ClassNotFoundException, SQLException{
+		
+		ajouter(numAssuranceMaladie, dossierJson);
+		
+		/*
 		JSONParser parser = new JSONParser();
     	Object obj = null;
 		obj = parser.parse(dossierJson);
@@ -155,7 +160,7 @@ public class ControlleurDeBd  {
         pstmt.setString(3,utilisateur);
         pstmt.setString(4,numAssuranceMaladie);
         pstmt.executeUpdate();
-        
+        */
         
 	}
 	
