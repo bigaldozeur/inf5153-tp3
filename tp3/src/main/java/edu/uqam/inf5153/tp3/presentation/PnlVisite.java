@@ -94,42 +94,7 @@ public class PnlVisite extends JPanel {
 		final JTextField textField;
 		if(comp != null) {
 			textField = ((JTextField)comp);
-			// Listen for changes in the text https://stackoverflow.com/questions/3953208/value-change-listener-to-jtextfield
-			textField.getDocument().addDocumentListener(new DocumentListener() {
-			  public void changedUpdate(DocumentEvent e) {
-			    modifierVisite(valeur);
-			  }
-			  public void removeUpdate(DocumentEvent e) {
-			    modifierVisite(valeur);
-			  }
-			  public void insertUpdate(DocumentEvent e) {
-			    modifierVisite(valeur);
-			  }
-
-			  public void modifierVisite(String valeur) {
-				  switch(nomComp)
-					{
-					case "NomMed": 	per.setNom(valeur);
-									vis.setMedecinVu(per);
-									break;
-					case "PrenomMed": 	per.setPrenom(valeur);
-										vis.setMedecinVu(per);
-					break;
-					case "DateVisite": vis.setDate(valeur);
-					break;
-					case "Diagnostique": vis.setDiagnostique(valeur);
-					break;
-					case "Traitement": vis.setTraitement(valeur);
-					break;
-					case "Resume": vis.setResume(valeur);
-					break;
-					case "Notes": vis.setNotes(valeur);
-					break;
-					default:
-					}
-			     }
-			});
-			
+			// Listen for changes in the text https://stackoverflow.com/questions/3953208/value-change-listener-to-jtextfield				
 			textField.addFocusListener(new FocusListener() {
 			    public void focusGained(FocusEvent e) {
 			    };
@@ -141,9 +106,6 @@ public class PnlVisite extends JPanel {
 						{
 						case "NomMed": 	per.setNom(valeur);
 										vis.setMedecinVu(per);
-										// TODO : enregistrer la visite au complet dans dossier
-										// TODO : notify pour enregistrement automatique du dossier
-										
 										break;
 						case "PrenomMed": 	per.setPrenom(valeur);
 											vis.setMedecinVu(per);

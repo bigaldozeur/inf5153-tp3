@@ -2,19 +2,28 @@ package edu.uqam.inf5153.tp3.presentation;
 
 
 import java.sql.SQLException;
-
+import java.util.HashMap;
 
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
+import javax.swing.JTextField;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 
 import edu.uqam.inf5153.tp3.application.ControleurDeGuiApp;
 import edu.uqam.inf5153.tp3.presentation.SessionFrm;
 import edu.uqam.inf5153.tp3.domaine.Antecedent;
 import edu.uqam.inf5153.tp3.domaine.Dossier;
+import edu.uqam.inf5153.tp3.domaine.Personne;
 import edu.uqam.inf5153.tp3.domaine.Visite;
 
 import javax.swing.JButton;
+import javax.swing.JComponent;
+
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.Rectangle;
@@ -32,6 +41,8 @@ public class PnlDossier extends JScrollPane {
 	private ControleurDeGuiApp cgui = null;
 	private Dossier dossier = null;
 	private String noRAMQ;
+	
+	private Personne per = new Personne();
 	/**
 	 * Create the panel.
 	 * @throws SQLException 
@@ -163,6 +174,80 @@ public class PnlDossier extends JScrollPane {
     	
     	posX = AidePanneau.getInstance().AjouterEntreePanneau("maladie : ", dossier.getMaladie(), posX, enableChamp, this); // TODO : à enlever, en attendant
     	posX = AidePanneau.getInstance().AjouterEntreePanneau("medecin : ", dossier.getMedecin(), posX, enableChamp, this); // TODO : à enlever, en attendant
-        
+        	
+    	
+		HashMap<String,Component> componentMap = createComponentMap(this); // pris exemple ici et modifié. https://stackoverflow.com/questions/4958600/get-a-swing-component-by-name
+		addInputMethodEventJTextField("NomPrenomPat", dossier, componentMap);
+		addInputMethodEventJTextField("DateNaiss", dossier, componentMap);
+		addInputMethodEventJTextField("Genre", dossier, componentMap);
+		addInputMethodEventJTextField("Pere", dossier, componentMap);
+		addInputMethodEventJTextField("Mere", dossier, componentMap);
+		addInputMethodEventJTextField("Ville", dossier, componentMap);
+		addInputMethodEventJTextField("Coor", dossier, componentMap);
+		addInputMethodEventJTextField("noRamq", dossier, componentMap);
 	}
+	
+	private boolean addInputMethodEventJTextField(final String nomComp, final Dossier dossier, HashMap<String,Component> componentMap) {
+		final Component comp = getComponentByName(nomComp, componentMap);
+		final String valeur = ((JTextField)comp).getText().toString();
+		final JTextField textField;
+		if(comp != null) {
+			textField = ((JTextField)comp);
+			// Listen for changes in the text https://stackoverflow.com/questions/3953208/value-change-listener-to-jtextfield
+				textField.addFocusListener(new FocusListener() {
+			    public void focusGained(FocusEvent e) {
+			    };
+			    public void focusLost(FocusEvent e) {
+			    	  EnregistrerVisite(valeur);
+			    }
+				private void EnregistrerVisite(String valeur) {
+					 switch(nomComp)
+						{
+						case "NomPrenomPat": //ant.setDiagnostique(valeur);
+						break;
+						case "DateNaiss": 	//ant.setTraitement(valeur);
+						break;
+						case "Genre": 
+							//per.setNom(valeur);
+							//ant.setMedecinTraitant(per);
+						break;
+						case "Pere": //ant.setDebutMaladie(valeur);
+						break;
+						case "Mere": //ant.setFinMaladie(valeur);
+						break;
+						case "Ville": //ant.setFinMaladie(valeur);
+						break;
+						case "Coor": //ant.setFinMaladie(valeur);
+						break;
+						case "NoRamq": //ant.setFinMaladie(valeur);
+						break;
+
+						default:
+						}	
+					 //dossier.setAntecedents(ant);
+				}
+			    
+			    });
+			return true;
+		}	
+		
+		return false;
+	}
+
+	private HashMap<String,Component> createComponentMap(JComponent comp) {
+		HashMap<String,Component> componentMap = new HashMap<String,Component>();
+        Component[] components = comp.getComponents();
+        for (int i=0; i < components.length; i++) {
+                componentMap.put(components[i].getName(), components[i]);
+        }
+		return componentMap;
+	}
+
+	public Component getComponentByName(String name, HashMap<String, Component> componentMap) {
+        if (componentMap.containsKey(name)) {
+                return (Component) componentMap.get(name);
+        }
+        else return null;
+	}
+
 }
