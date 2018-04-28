@@ -44,9 +44,9 @@ public class AidePanneau {
 		// Abstract Factory (pourrait être un label pour un dossier avec différentes caractéristiques et un label pour un autre type)
 		LabelTextFactory controls = new DossierLabelTextFactory();
 		if(afficherTextField) {
-			TextField text = controls.createTextField(nomTextField, valeurTextField, posX, panneau);
+			controls.createTextField(nomTextField, valeurTextField, posX, panneau);
 		}
-        Label lbl = controls.createLabel("", textLabel, posX, panneau);
+        controls.createLabel("", textLabel, posX, panneau);
 			
 		posX+=bond;
     	return posX;

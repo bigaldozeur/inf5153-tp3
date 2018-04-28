@@ -1,6 +1,5 @@
 package edu.uqam.inf5153.tp3.application;
 
-import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import org.json.simple.parser.ParseException;
@@ -10,7 +9,6 @@ import com.google.gson.Gson;
 import edu.uqam.inf5153.tp3.application.session.Session;
 import edu.uqam.inf5153.tp3.domaine.Dossier;
 import edu.uqam.inf5153.tp3.domaine.GestionDossier;
-import edu.uqam.inf5153.tp3.servicesTechniques.ControlleurDeBd;
 import edu.uqam.inf5153.tp3.servicesTechniques.securite.ControlleurDeBdSecurite;
 
 public class ControleurDeGuiApp {
