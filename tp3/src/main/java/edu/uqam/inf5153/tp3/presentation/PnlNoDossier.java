@@ -59,7 +59,7 @@ public class PnlNoDossier extends JPanel {
 	
 	void verifierNoRamq() {
 			try {
-				if(SessionFrm.controleurGui.index(textNoRamq.getText())) {
+				if(SessionFrm.controleurGui.existe(textNoRamq.getText())) {
 					PnlDossier pnlDossier = new PnlDossier(textNoRamq.getText());
 					
 					JScrollPane sp = new JScrollPane(pnlDossier);

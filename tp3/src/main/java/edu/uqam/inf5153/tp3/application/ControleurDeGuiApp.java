@@ -43,13 +43,13 @@ public class ControleurDeGuiApp {
 	
 
 	// Permet de verifier un index
-	public boolean index(Object obj) throws ClassNotFoundException, SQLException
+	public boolean existe(Object obj) throws ClassNotFoundException, SQLException
 	{
 		String noRamq = String.valueOf(obj);
 		if(noRamq != null) {
 			// Aller vérifier si le numéro de ramq existe dans la bd.
 			GestionDossier gd = new GestionDossier();
-			return gd.rechercher(noRamq);
+			return gd.existe(noRamq);
 		}
 		return false;
 	}

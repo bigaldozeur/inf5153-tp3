@@ -14,10 +14,10 @@ public class GestionDossier {
 		
 	}
 	
-	public boolean rechercher(Object obj) {
+	public boolean existe(Object obj) {
 		String noRamq = String.valueOf(obj);
 		try {
-			if(noRamq != null || ControlleurDeBd.rechercher(noRamq))
+			if(noRamq != null || ControlleurDeBd.dossierExiste(noRamq))
 				return true;
 			else
 				return false;
