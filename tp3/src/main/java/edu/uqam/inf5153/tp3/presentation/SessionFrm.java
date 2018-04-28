@@ -5,7 +5,7 @@ import edu.uqam.inf5153.tp3.application.ControleurDeGuiApp;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
-
+import edu.uqam.inf5153.tp3.application.ControleurDeGuiApp;
 
 public class SessionFrm {
 
@@ -13,7 +13,7 @@ public class SessionFrm {
 	protected static SessionFrm mainWindow;
 	private boolean initialise = false;
 	protected static boolean isPersMed = true; // TODO : éventuellement deplacer dans autorisation. Le Personnel Médical ne peut pas changer les choses
-	static ControleurDeGuiApp controleurGui;
+	private static ControleurDeGuiApp controleurGui;
 	/**
 	 * Launch the application.
 	 */
@@ -51,7 +51,7 @@ public class SessionFrm {
 	/** 
 	 * Permet d'obtenir le contrôleur.
 	 * */
-	public ControleurDeGuiApp getControleurGui(){
+	public static ControleurDeGuiApp getControleurGui(){
 		return controleurGui;
 	}
 	

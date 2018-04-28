@@ -160,6 +160,7 @@ public class PnlVisite extends JPanel {
 						break;
 						default:
 						}	
+					 dossier.setVisite(vis);
 				}
 			    
 			    });

@@ -13,7 +13,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.Rectangle;
 import javax.swing.JCheckBox;
 import java.awt.event.ItemListener;
 import java.awt.event.ItemEvent;
@@ -124,12 +123,12 @@ public class PnlSession extends JPanel {
 	private void accepterUtilisateur() {
 		try {
 				StringBuilder sb = new StringBuilder();
-				boolean result = SessionFrm.controleurGui.verifierSession(textField.getText(), passwordField.getPassword(), sb);
+				boolean result = SessionFrm.getControleurGui().verifierSession(textField.getText(), passwordField.getPassword(), sb);
 				if(result == false) {
 					JOptionPane.showMessageDialog(SessionFrm.mainWindow.frmDossierMdicalCentralis,sb.toString(),"Authentification",JOptionPane.ERROR_MESSAGE);
 					return;
 				}
-				if(SessionFrm.controleurGui.verifierAuthentifier(textField.getText(), passwordField.getPassword())) {
+				if(SessionFrm.getControleurGui().verifierAuthentifier(textField.getText(), passwordField.getPassword())) {
 						SessionFrm.mainWindow.frmDossierMdicalCentralis.setContentPane(new PnlNoDossier(textField.getText()));
 						SessionFrm.mainWindow.frmDossierMdicalCentralis.revalidate();
 				}
@@ -147,14 +146,14 @@ public class PnlSession extends JPanel {
 	private void creerUtilisateur() {
 		try {
 				StringBuilder sb = new StringBuilder();
-				boolean result = SessionFrm.controleurGui.creerVerifierSession(textField.getText(), passwordField.getPassword(), sb, personnelMedical);
+				boolean result = SessionFrm.getControleurGui().creerVerifierSession(textField.getText(), passwordField.getPassword(), sb, personnelMedical);
 				if(result == false) {
 					JOptionPane.showMessageDialog(SessionFrm.mainWindow.frmDossierMdicalCentralis,sb.toString(),"Authentification",JOptionPane.ERROR_MESSAGE);
 				}
 				else{
 					JOptionPane.showMessageDialog(SessionFrm.mainWindow.frmDossierMdicalCentralis,sb.toString(),"Authentification",JOptionPane.INFORMATION_MESSAGE);
 				
-					if(SessionFrm.controleurGui.verifierAuthentifier(textField.getText(), passwordField.getPassword())) {
+					if(SessionFrm.getControleurGui().verifierAuthentifier(textField.getText(), passwordField.getPassword())) {
 							SessionFrm.mainWindow.frmDossierMdicalCentralis.setContentPane(new PnlNoDossier(textField.getText()));
 							SessionFrm.mainWindow.frmDossierMdicalCentralis.revalidate();
 					}

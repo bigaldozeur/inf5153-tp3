@@ -8,6 +8,7 @@ import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 
 import edu.uqam.inf5153.tp3.application.ControleurDeGuiApp;
+import edu.uqam.inf5153.tp3.presentation.SessionFrm;
 import edu.uqam.inf5153.tp3.domaine.Antecedent;
 import edu.uqam.inf5153.tp3.domaine.Dossier;
 import edu.uqam.inf5153.tp3.domaine.Visite;
@@ -17,15 +18,20 @@ import java.awt.event.ActionListener;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.Rectangle;
-
+/*
+ * Design pattern Observer
+ * inspiré de : https://www.tutorialspoint.com/design_pattern/observer_pattern.htm
+ * voir : classe Observateur et méthode attach et informerLesUtilisateurs
+ * */
 public class PnlDossier extends JScrollPane {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	ControleurDeGuiApp cgui = new ControleurDeGuiApp();
-	Dossier dossier = new Dossier();
+	private ControleurDeGuiApp cgui = null;
+	private Dossier dossier = null;
+	private String noRAMQ;
 	/**
 	 * Create the panel.
 	 * @throws SQLException 
@@ -38,6 +44,13 @@ public class PnlDossier extends JScrollPane {
 	}
 	
 	public PnlDossier(String noRAMQ, String user) throws ClassNotFoundException, SQLException {
+		this.noRAMQ = noRAMQ;
+		cgui = SessionFrm.getControleurGui();
+		cgui.setNoRamq(noRAMQ);
+		dossier =  new Dossier();
+		dossier = cgui.getDossier(noRAMQ);
+		dossier.attach(cgui);
+
 	    init(noRAMQ, user);	
 	}
 	        
@@ -71,7 +84,8 @@ public class PnlDossier extends JScrollPane {
     	int posX = 120;
     	int bond = 20;
     	
-    	dossier = cgui.getDossier(noRAMQ);
+    	
+
     	     	
     	posX = AidePanneau.getInstance().AjouterEntreePanneau("Nom et prénom : ", dossier.getNom() + " " + dossier.getPrenom(), posX, enableChamp, this);     
     	posX = AidePanneau.getInstance().AjouterEntreePanneau("Date de naissance : ", dossier.getDateDeNaissance(), posX, enableChamp, this);     

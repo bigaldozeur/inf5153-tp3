@@ -40,7 +40,7 @@ public class GestionDossier {
 		
 		ResultSet rs;
 		rs = cbd.consulterDossier(noRamq);
-		Dossier dossier = null;
+		Dossier dossier = new Dossier();
 		while(rs.next()) {
 			dossier = jsonStrToDossier(rs.getString("dossier"));
 		}
