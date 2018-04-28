@@ -106,6 +106,7 @@ public class PnlAntecedent extends JPanel {
 						break;
 						default:
 						}	
+					 dossier.setAntecedents(ant);
 				}
 			    
 			    });
