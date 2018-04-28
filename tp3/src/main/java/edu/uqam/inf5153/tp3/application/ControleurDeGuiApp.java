@@ -16,21 +16,24 @@ import edu.uqam.inf5153.tp3.servicesTechniques.securite.ControlleurDeBdSecurite;
 public class ControleurDeGuiApp {
 	
 	private Session maSession = null;
-	
+	GestionDossier gd = null;
 	public ControleurDeGuiApp(){
 		maSession = new Session();
+		gd = new GestionDossier();
 	}
 	
 	
 	/**
 	 * Permet de modifier un dossier
 	 * @throws ParseException 
+	 * @throws SQLException 
+	 * @throws ClassNotFoundException 
 	 * */
-	public boolean edit(String noRamq, Dossier dossier) throws ParseException{
+	public void edit(String noRamq, Dossier dossier) throws ParseException, ClassNotFoundException, SQLException{
 		Gson g = new Gson();
-		GestionDossier gd = new GestionDossier();
-		boolean retour = gd.modifier(noRamq, g.toJson(dossier)); 
-		return (retour);
+		
+		gd.modifier(noRamq, g.toJson(dossier)); 
+	
 	}
 	
 	
@@ -39,12 +42,10 @@ public class ControleurDeGuiApp {
 	public boolean existe(Object obj) throws ClassNotFoundException, SQLException
 	{
 		String noRamq = String.valueOf(obj);
-		if(noRamq != null) {
-			// Aller vérifier si le numéro de ramq existe dans la bd.
-			GestionDossier gd = new GestionDossier();
-			return gd.existe(noRamq);
-		}
-		return false;
+		
+		// Aller vérifier si le numéro de ramq existe dans la bd.
+		return gd.existe(noRamq);
+		
 	}
 	
 	/**
@@ -84,9 +85,9 @@ public class ControleurDeGuiApp {
 		}
 	}
 
-	public static Dossier getDossier(String noRAMQ) throws ClassNotFoundException, SQLException {
-		GestionDossier gs = new GestionDossier();
-		return gs.rechercher(noRAMQ);
+	public Dossier getDossier(String noRAMQ) throws ClassNotFoundException, SQLException {
+		
+		return gd.rechercher(noRAMQ);
 	}
 	
 	

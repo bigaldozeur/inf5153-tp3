@@ -1,9 +1,8 @@
 package edu.uqam.inf5153.tp3.presentation;
 
-import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
+
 import java.sql.SQLException;
-import java.util.Vector;
+
 
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -14,7 +13,7 @@ import edu.uqam.inf5153.tp3.application.ControleurDeGuiApp;
 import edu.uqam.inf5153.tp3.domaine.Antecedent;
 import edu.uqam.inf5153.tp3.domaine.Dossier;
 import edu.uqam.inf5153.tp3.domaine.Visite;
-import edu.uqam.inf5153.tp3.servicesTechniques.ControlleurDeBd;
+
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.Dimension;
@@ -29,15 +28,17 @@ public class PnlDossier extends JScrollPane {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+	ControleurDeGuiApp cgui = new ControleurDeGuiApp();
+	Dossier dossier = new Dossier();
 	/**
 	 * Create the panel.
 	 * @throws SQLException 
 	 * @throws ClassNotFoundException 
 	 */
 	public PnlDossier() throws ClassNotFoundException, SQLException {
-		setBounds(new Rectangle(0, 0, 750, 800));
-	    init("abc1234");		      	        	
+		 
+		//setBounds(new Rectangle(0, 0, 750, 800));
+	    //init("abc1234");		      	        	
 	}
 	
 	public PnlDossier(String noRAMQ) throws ClassNotFoundException, SQLException {
@@ -45,6 +46,7 @@ public class PnlDossier extends JScrollPane {
 	}
 	        
 	private void init(final String noRAMQ) throws SQLException, ClassNotFoundException {
+		
 		
 		setLayout(null);
 		setBounds(new Rectangle(0, 0, 750, 800));
@@ -69,7 +71,7 @@ public class PnlDossier extends JScrollPane {
     	int posX = 120;
     	int bond = 20;
     	
-    	final Dossier dossier = ControleurDeGuiApp.getDossier(noRAMQ);//ControleurDeGuiApp.create(rs.getString("dossier"));
+    	dossier = cgui.getDossier(noRAMQ);
     	     	
     	posX = AidePanneau.getInstance().AjouterEntreePanneau("Nom et prénom : ", dossier.getNom() + " " + dossier.getPrenom(), posX, this);     
     	posX = AidePanneau.getInstance().AjouterEntreePanneau("Date de naissance : ", dossier.getDateDeNaissance(), posX, this);     
