@@ -19,7 +19,8 @@ public class Dossier {
 	private String medecin = new String();
 	private Personne patient = new Personne();
 	private GENRE genre = GENRE.NOT_KNOWN;
-	private String dateDeNaissance = new String(); // TODO : Devrait être un champs Date
+	// TODO : Devrait être un champs Date
+	private String dateDeNaissance = new String(); 
 	private String pere = new String();
 	private String mere = new String();
 	private String villeNaissance = new String();
@@ -32,9 +33,15 @@ public class Dossier {
 	public String getNom() {
 		return patient.nom;
 	}
+	public void setNom(String nom) {
+		this.patient.nom = nom;
+	}
 	
 	public String getPrenom() {
 		return patient.prenom;
+	}
+	public void setPrenom(String prenom) {
+		this.patient.prenom = prenom;
 	}
 	
 	public String getMaladie() {
@@ -78,7 +85,7 @@ public class Dossier {
 	}
 	
 	public String getCoordonnees() {
-		return this.coor.toString();
+		return this.getCoor().toString();
 	}
 
 	public Antecedent[] getAntecedents() {	
@@ -89,6 +96,12 @@ public class Dossier {
 	
 	public void setAntecedents(Antecedent ant) {	
 		antecedents.add(ant);
+		informerLesObservateurs();
+		
+	}
+	
+	public void setAntecedents(Antecedent ant, int ind) {	
+		antecedents.set(ind, ant);
 		informerLesObservateurs();
 		
 	}
@@ -119,6 +132,12 @@ public class Dossier {
 		informerLesObservateurs();
 		
 	}
+	
+	public void setVisite(Visite vis, int ind) {	
+		visites.set(ind, vis);
+		informerLesObservateurs();
+		
+	}
 	/*public boolean getPersoMed() {
 		return this.persoMed == 0 ?false:true;
 	}*/
@@ -130,5 +149,29 @@ public class Dossier {
 		for (Observateur observateur : observateurs) {
 			observateur.update();
 		}
+	}
+
+	public void setPere(String pere) {
+		this.pere = pere;
+	}
+
+	public void setMere(String mere) {
+		this.mere = mere;
+	}
+
+	public void setVilleNaissance(String villeNaissance) {
+		this.villeNaissance = villeNaissance;
+	}
+
+	public void setDateDeNaissance(String dateDeNaissance) {
+		this.dateDeNaissance = dateDeNaissance;
+	}
+
+	public Coordonnees getCoor() {
+		return coor;
+	}
+
+	public void setCoor(Coordonnees coor) {
+		this.coor = coor;
 	} 	
 }

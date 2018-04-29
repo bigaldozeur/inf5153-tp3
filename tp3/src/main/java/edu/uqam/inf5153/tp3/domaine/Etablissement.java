@@ -4,7 +4,7 @@ public class Etablissement {
 	private String nom = new String();
 	private Adresse adr = new Adresse();
 	Etablissement(){}
-	Etablissement(String nom, Adresse adr){super(); this.setNom(nom); this.setAdr(adr);}
+	public Etablissement(String nom, Adresse adr){super(); this.setNom(nom); this.setAdr(adr);}
 	public String toString() {
 		return getNom() + "\r\n" + getAdr().toString();
 	}
