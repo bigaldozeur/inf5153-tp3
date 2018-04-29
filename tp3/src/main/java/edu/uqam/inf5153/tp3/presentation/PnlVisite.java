@@ -10,11 +10,14 @@ import java.util.HashMap;
 
 import javax.swing.JButton;
 import javax.swing.JComponent;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+
+import org.json.simple.parser.ParseException;
 
 import edu.uqam.inf5153.tp3.domaine.Dossier;
 import edu.uqam.inf5153.tp3.domaine.Personne;
@@ -160,7 +163,13 @@ public class PnlVisite extends JPanel {
 						break;
 						default:
 						}	
-					 dossier.setVisite(vis);
+					 
+					 try {
+						 dossier.setVisite(vis);
+					 } catch (ClassNotFoundException | ParseException | SQLException e) {
+						 JOptionPane.showMessageDialog(SessionFrm.mainWindow.frmDossierMdicalCentralis,"Erreur, l'insertion dans la base de données a échouée!","Visites", JOptionPane.ERROR_MESSAGE);
+						 System.out.println(e);
+					 }
 				}
 			    
 			    });

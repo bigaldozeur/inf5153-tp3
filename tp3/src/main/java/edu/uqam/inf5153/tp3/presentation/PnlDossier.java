@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 
+import org.json.simple.parser.ParseException;
+
 import edu.uqam.inf5153.tp3.application.ControleurDeGuiApp;
 import edu.uqam.inf5153.tp3.presentation.SessionFrm;
 import edu.uqam.inf5153.tp3.domaine.Antecedent;
@@ -43,12 +45,13 @@ public class PnlDossier extends JScrollPane {
 	    //init("abc1234");		      	        	
 	}
 	
-	public PnlDossier(String noRAMQ, String user) throws ClassNotFoundException, SQLException {
+	public PnlDossier(String noRAMQ, String user) throws ClassNotFoundException, SQLException, ParseException {
 		this.noRAMQ = noRAMQ;
 		cgui = SessionFrm.getControleurGui();
 		cgui.setNoRamq(noRAMQ);
 		dossier =  new Dossier();
 		dossier = cgui.getDossier(noRAMQ);
+		dossier.setNoRamq(noRAMQ);
 		dossier.attach(cgui);
 
 	    init(noRAMQ, user);	

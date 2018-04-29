@@ -33,10 +33,6 @@ public class ControlleurDeBdSecurite {
 		
 		String mpbd = rs.getString("pwdhash");	
 		  
-	
-		System.out.println(mpbd);
-		System.out.println(EncrypterString.encrypter(pwd));
-		
 		if (EncrypterString.verifierHash(pwd, mpbd)){
 			authificationEstValide = true;
 		}else{

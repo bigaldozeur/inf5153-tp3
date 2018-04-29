@@ -1,9 +1,11 @@
 package edu.uqam.inf5153.tp3.domaine;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.JComponent;
+
+import org.json.simple.parser.ParseException;
 
 /*
  * Design pattern Observer
@@ -14,12 +16,12 @@ public class Dossier {
 	private List<Observateur> observateurs = new ArrayList<Observateur>();
 
 	
-	
+	private String noRamq = "";
 	private String maladie = new String();
 	private String medecin = new String();
 	private Personne patient = new Personne();
 	private GENRE genre = GENRE.NOT_KNOWN;
-	private String dateDeNaissance = new String(); // TODO : Devrait être un champs Date
+	private String dateDeNaissance = new String(); 
 	private String pere = new String();
 	private String mere = new String();
 	private String villeNaissance = new String();
@@ -29,25 +31,38 @@ public class Dossier {
 	
 	public Dossier(){}
 	
+	public void setNoRamq(String noRamq){
+		this.noRamq = noRamq;
+		
+	}
+	public String getNoRamq(){
+		return noRamq;
+	}
 	public String getNom() {
 		return patient.nom;
+	}
+	public void setNom(String nom) {
+		this.patient.nom = nom;
 	}
 	
 	public String getPrenom() {
 		return patient.prenom;
 	}
+	public void setPrenom(String prenom) {
+		this.patient.prenom = prenom;
+	}
 	
 	public String getMaladie() {
 		return maladie;
 	}
-	public void setMaladie(String maladie) {
+	public void setMaladie(String maladie) throws ClassNotFoundException, ParseException, SQLException {
 		this.maladie = maladie;
 		informerLesObservateurs();
 	}
 	public String getMedecin() {
 		return medecin;
 	}
-	public void setMedecin(String medecin) {
+	public void setMedecin(String medecin) throws ClassNotFoundException, ParseException, SQLException {
 		this.medecin = medecin;
 		informerLesObservateurs();
 	}
@@ -56,7 +71,7 @@ public class Dossier {
 		return genre.toString();
 	}
 
-	public void setGenre(GENRE genre) {
+	public void setGenre(GENRE genre) throws ClassNotFoundException, ParseException, SQLException {
 		this.genre = genre;
 		informerLesObservateurs();
 	}
@@ -78,7 +93,7 @@ public class Dossier {
 	}
 	
 	public String getCoordonnees() {
-		return this.coor.toString();
+		return this.getCoor().toString();
 	}
 
 	public Antecedent[] getAntecedents() {	
@@ -87,8 +102,14 @@ public class Dossier {
 		return ant;
 	}
 	
-	public void setAntecedents(Antecedent ant) {	
+	public void setAntecedents(Antecedent ant) throws ClassNotFoundException, ParseException, SQLException {	
 		antecedents.add(ant);
+		informerLesObservateurs();
+		
+	}
+	
+	public void setAntecedents(Antecedent ant, int ind) throws ClassNotFoundException, ParseException, SQLException {	
+		antecedents.set(ind, ant);
 		informerLesObservateurs();
 		
 	}
@@ -98,24 +119,16 @@ public class Dossier {
 		vis = visites.toArray(vis);
 		return vis;
 		
-		/*
-		if(visites == null) {
-			// TODO : enlever, c'est une visite par défaut
-			Visite vis = new Visite(new Etablissement("etablissement 1", new Adresse()),
-					new Personne("nom", "prenom"),
-					"2000-01-01", 
-					"Les diagnostique est...", 
-					"Le traitement est ...\r\n Je ne sais pas", 
-					"résumé de la visite \r\nça a bien été!", 
-					"note aux autres médecin");
-			
-			visites = new Visite[]{vis};
-		}
-		*/
-		//return visites;
+		
 	}
-	public void setVisite(Visite vis) {	
+	public void setVisite(Visite vis) throws ClassNotFoundException, ParseException, SQLException {	
 		visites.add(vis);
+		informerLesObservateurs();
+		
+	}
+	
+	public void setVisite(Visite vis, int ind) throws ClassNotFoundException, ParseException, SQLException {	
+		visites.set(ind, vis);
 		informerLesObservateurs();
 		
 	}
@@ -126,9 +139,33 @@ public class Dossier {
 		observateurs.add(obs);		
 	}
 
-	public void informerLesObservateurs(){
+	public void informerLesObservateurs() throws ClassNotFoundException, ParseException, SQLException{
 		for (Observateur observateur : observateurs) {
-			observateur.update();
+			observateur.update(this);
 		}
+	}
+
+	public void setPere(String pere) {
+		this.pere = pere;
+	}
+
+	public void setMere(String mere) {
+		this.mere = mere;
+	}
+
+	public void setVilleNaissance(String villeNaissance) {
+		this.villeNaissance = villeNaissance;
+	}
+
+	public void setDateDeNaissance(String dateDeNaissance) {
+		this.dateDeNaissance = dateDeNaissance;
+	}
+
+	public Coordonnees getCoor() {
+		return coor;
+	}
+
+	public void setCoor(Coordonnees coor) {
+		this.coor = coor;
 	} 	
 }

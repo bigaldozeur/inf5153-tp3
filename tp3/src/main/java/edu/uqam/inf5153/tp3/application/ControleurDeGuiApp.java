@@ -43,7 +43,7 @@ public class ControleurDeGuiApp extends Observateur {
 	public void edit(String noRamq, Dossier dossier) throws ParseException, ClassNotFoundException, SQLException{
 		Gson g = new Gson();
 		
-		gd.modifier(noRamq, g.toJson(dossier)); 
+		gd.modifier(noRamq, dossier); 
 	
 	}
 	
@@ -126,7 +126,7 @@ public class ControleurDeGuiApp extends Observateur {
 		}
 	}
 
-	public Dossier getDossier(String noRAMQ) throws ClassNotFoundException, SQLException {
+	public Dossier getDossier(String noRAMQ) throws ClassNotFoundException, SQLException, ParseException {
 		
 		return gd.rechercher(noRAMQ);
 	}
@@ -172,10 +172,11 @@ public class ControleurDeGuiApp extends Observateur {
 	}
 	
 	 @Override
-	 public void update() {
-System.out.println("modification est survenur");
+	 public void update(Dossier dossier) throws ClassNotFoundException, ParseException, SQLException  {
+		 
+		 gd.modifier(noRamq, dossier);
 
-}
+	 }
 
 	
 }

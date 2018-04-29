@@ -6,6 +6,8 @@ import java.sql.SQLException;
 import javax.swing.JComponent;
 import javax.swing.JScrollPane;
 
+import org.json.simple.parser.ParseException;
+
 
 // Singleton
 public class AidePanneau {
@@ -57,19 +59,26 @@ public class AidePanneau {
     	return posX;
 	}
 
-	public void retourAuDossier(final String noRAMQ, final String user)
-			throws ClassNotFoundException, SQLException {
+	public void retourAuDossier(final String noRAMQ, final String user) throws ClassNotFoundException, SQLException {
 		PnlDossier pnlDossier;
-		pnlDossier = new PnlDossier(noRAMQ, user);
-		JScrollPane sp = new JScrollPane(pnlDossier);
-		sp.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-		sp.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-		sp.setBounds(50, 30, 400, 100);
+		JScrollPane sp;
+		try {
+			pnlDossier = new PnlDossier(noRAMQ, user);
+			sp = new JScrollPane(pnlDossier);
+			sp.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+			sp.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+			sp.setBounds(50, 30, 400, 100);
+			
+			SessionFrm.mainWindow.frmDossierMdicalCentralis.getContentPane().add(sp);
+			
+			SessionFrm.mainWindow.frmDossierMdicalCentralis.setContentPane(sp);
+			SessionFrm.mainWindow.frmDossierMdicalCentralis.setVisible(true);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
-		SessionFrm.mainWindow.frmDossierMdicalCentralis.getContentPane().add(sp);
 		
-		SessionFrm.mainWindow.frmDossierMdicalCentralis.setContentPane(sp);
-		SessionFrm.mainWindow.frmDossierMdicalCentralis.setVisible(true);
 	}
 
 }

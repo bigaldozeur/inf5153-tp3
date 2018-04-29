@@ -138,29 +138,6 @@ public class ControlleurDeBd  {
 		
 		ajouter(numAssuranceMaladie, dossierJson);
 		
-		/*
-		JSONParser parser = new JSONParser();
-    	Object obj = null;
-		obj = parser.parse(dossierJson);
-        JSONObject jsonObject = (JSONObject) obj;
-        String medecin = (String) jsonObject.get("medecin");
-        String utilisateur = "system";
-        
-        if( !Connexion.estConnecter() || conn == null ){
-			seConnecter();
-		}
-        
-        String sql = "update DossierMedical set dossier=?, medecin=?, utilisateur=? where ";
-        sql += " id = (select max(id) from DossierMedical where numAssuranceMaladie = ?)";
-        PreparedStatement pstmt = conn.prepareStatement(sql);
-        
-       
-        pstmt.setString(1,jsonObject.toJSONString());
-        pstmt.setString(2,medecin);
-        pstmt.setString(3,utilisateur);
-        pstmt.setString(4,numAssuranceMaladie);
-        pstmt.executeUpdate();
-        */
         
 	}
 	

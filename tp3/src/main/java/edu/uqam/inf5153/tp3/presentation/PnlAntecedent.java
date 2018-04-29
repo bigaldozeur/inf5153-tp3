@@ -10,9 +10,12 @@ import java.util.HashMap;
 
 import javax.swing.JButton;
 import javax.swing.JComponent;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
+
+import org.json.simple.parser.ParseException;
 
 import edu.uqam.inf5153.tp3.domaine.Dossier;
 import edu.uqam.inf5153.tp3.domaine.Personne;
@@ -106,10 +109,14 @@ public class PnlAntecedent extends JPanel {
 						break;
 						default:
 						}	
-					 dossier.setAntecedents(ant);
-				}
-			    
-			    });
+					 
+					 try {
+						 dossier.setAntecedents(ant);
+					 } catch (ClassNotFoundException | ParseException | SQLException  e) {
+						 JOptionPane.showMessageDialog(SessionFrm.mainWindow.frmDossierMdicalCentralis,"Erreur, l'insertion dans la base de données a échouée!","Antécédents", JOptionPane.ERROR_MESSAGE);
+					 }
+					}
+				});
 			return true;
 		}	
 		
