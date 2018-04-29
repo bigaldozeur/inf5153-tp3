@@ -20,7 +20,8 @@
 <fullyQualifiedTypeName name="edu.uqam.inf5153.tp3.fondation.CryptWithSHA"/>
 <fullyQualifiedTypeName name="edu.uqam.inf5153.tp3.fondation.CryptWithSalt"/>
 <fullyQualifiedTypeName name="edu.uqam.inf5153.tp3.servicesTechniques.securite.ControlleurDeBdSecurite"/>
-<fullyQualifiedTypeName name="java.lang.System"/>
 <fullyQualifiedTypeName name="javax.crypto.spec.SecretKeySpec"/>
 <fullyQualifiedTypeName name="javax.crypto.Cipher"/>
+<fullyQualifiedTypeName name="javax.swing.JOptionPane"/>
+<fullyQualifiedTypeName name="java.lang.System"/>
 </qualifiedTypeNameHistroy>

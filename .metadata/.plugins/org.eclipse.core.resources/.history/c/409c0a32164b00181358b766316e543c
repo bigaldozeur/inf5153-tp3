@@ -1,0 +1,11 @@
+package edu.uqam.inf5153.tp3.domaine;
+/*
+ * Design pattern Observer
+ * inspiré de : https://www.tutorialspoint.com/design_pattern/observer_pattern.htm
+ * 
+ * */
+public abstract class Observateur {
+	 protected SujetObserve sujet;
+	 protected void setSujetObserve(SujetObserve);
+	 public abstract void update();
+}

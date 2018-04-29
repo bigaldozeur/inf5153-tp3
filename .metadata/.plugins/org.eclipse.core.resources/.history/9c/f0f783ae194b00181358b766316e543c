@@ -1,0 +1,34 @@
+package edu.uqam.inf5153.tp3.domaine;
+
+import java.util.ArrayList;
+import java.util.List;
+/*
+ * Design pattern Observer
+ * inspiré de : https://www.tutorialspoint.com/design_pattern/observer_pattern.htm
+ * 
+ * */
+public class SujetObserve {
+
+	   private List<Observateur> observateurs = new ArrayList<Observateur>();
+	   private int etat;
+
+	   public int getEtat() {
+	      return etat;
+	   }
+
+	   public void setEtat(int etat) {
+	      this.etat = etat;
+	      informerLesObservateurs();
+	   }
+
+	   public void attach(Observateur obs){
+		   observateurs.add(obs);		
+	   }
+
+	   public void informerLesObservateurs(){
+	      for (Observateur observateur : observateurs) {
+	         observateur.update();
+	      }
+	   } 	
+}
+

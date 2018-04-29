@@ -1,0 +1,54 @@
+package edu.uqam.inf5153.tp3.domaine;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import org.json.simple.parser.ParseException;
+
+import com.google.gson.Gson;
+
+import edu.uqam.inf5153.tp3.servicesTechniques.ControlleurDeBd;
+
+public class GestionDossier {
+	ControlleurDeBd cbd = new ControlleurDeBd();
+	public GestionDossier(){
+		
+	}
+	
+	public boolean existe(String noRamq) throws ClassNotFoundException, SQLException {
+		
+		return cbd.dossierExiste(noRamq);
+		
+	}
+	
+	public void modifier(String noRamq, Dossier dossier) throws ParseException, ClassNotFoundException, SQLException {
+		
+		cbd.modifier(noRamq, dossierToJsonStr(dossier));
+		
+	}
+	
+	private String dossierToJsonStr(Dossier dossier){
+		Gson g = new Gson();
+		return g.toJson(dossier);
+	}
+	
+	/**
+	 * Permet de construire un dossier à partir d'un json
+	 * */
+	private Dossier jsonStrToDossier(String json){
+		Gson g = new Gson();
+		return (g.fromJson(json, Dossier.class));
+	}
+	
+	public Dossier rechercher(String noRamq) throws ClassNotFoundException, SQLException {
+		
+		ResultSet rs;
+		rs = cbd.consulterDossier(noRamq);
+		Dossier dossier = new Dossier();
+		while(rs.next()) {
+			dossier = jsonStrToDossier(rs.getString("dossier"));
+		}
+		return dossier;
+	}
+	
+}
